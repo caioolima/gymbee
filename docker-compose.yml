@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    container_name: gymbee-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: gymbee
+      POSTGRES_PASSWORD: P0stgr33s_GymB33_2025!
+      POSTGRES_DB: gymbee
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
