@@ -9,8 +9,31 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "GymBee - Sua comunidade fitness",
-  description: "Plataforma inteligente para conectar pessoas e personal trainers",
+  title: "GymBee - Comunidade Fitness Online",
+  description:
+    "A GymBee é a comunidade fitness que conecta pessoas, treinos e personal trainers em um só lugar. Encontre motivação, compartilhe experiências e alcance seus objetivos de forma mais leve.",
+  keywords: [
+    "fitness",
+    "treino online",
+    "comunidade fitness",
+    "personal trainer",
+    "exercícios",
+    "saúde",
+    "bem-estar",
+    "academia online",
+  ],
+  openGraph: {
+    title: "GymBee - Comunidade Fitness Online",
+    description:
+      "Conecte-se com pessoas, encontre treinos e receba dicas de personal trainers. Tudo isso em uma comunidade fitness feita para você.",
+    url: "https://gymbee.com.br", // ajuste se o domínio já existir
+    siteName: "GymBee",
+    locale: "pt_BR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://gymbee.com.br", // já garante a canonical pro SEO
+  },
 };
 
 export default function RootLayout({
