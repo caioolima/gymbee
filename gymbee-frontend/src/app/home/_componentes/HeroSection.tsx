@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, MapPin, Calendar, TrendingUp, Download } from 'lucide-react';
+import { ArrowRight, Users, MapPin, Calendar, Download } from 'lucide-react';
 
 export function HeroSection() {
   return (

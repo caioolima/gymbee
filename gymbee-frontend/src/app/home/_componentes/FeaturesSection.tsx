@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Users, Handshake, MapPin, BookOpen, Smartphone, Zap, Shield, Clock } from 'lucide-react';
+import { Calendar, Users, Handshake, MapPin, BookOpen, Smartphone, Zap } from 'lucide-react';
 
 export function FeaturesSection() {
   const features = [

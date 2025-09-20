@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { User, Mail, Lock, Calendar, CreditCard, Award, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface TrainerRegisterFormProps {
   onSuccess?: () => void;

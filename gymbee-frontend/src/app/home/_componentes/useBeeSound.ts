@@ -7,7 +7,7 @@ export function useBeeSound() {
 
   useEffect(() => {
     // Criar o contexto de áudio
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     
     // Função para gerar o som de zumbido
     const createBuzzSound = () => {
@@ -35,7 +35,7 @@ export function useBeeSound() {
     };
 
     // Armazenar a função para uso posterior
-    audioRef.current = { play: createBuzzSound } as any;
+    audioRef.current = { play: createBuzzSound } as unknown as HTMLAudioElement;
 
     return () => {
       if (audioContext.state !== 'closed') {
