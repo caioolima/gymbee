@@ -129,8 +129,8 @@ export function HeroSection() {
                 </div>
                 <div className="bg-input-bg border border-border rounded-lg sm:rounded-xl p-3 sm:p-4">
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent mb-2" />
-                  <div className="text-foreground font-semibold text-xs sm:text-sm mb-1">Academias</div>
-                  <div className="text-text-muted text-xs">Próximas a você</div>
+                  <div className="text-foreground font-semibold text-xs sm:text-sm mb-1">Localização</div>
+                  <div className="text-text-muted text-xs">Encontre pessoas próximas</div>
                 </div>
               </div>
 

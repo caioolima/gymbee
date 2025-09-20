@@ -1,39 +1,27 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, Users, Handshake, MapPin, BookOpen, Smartphone, Zap } from 'lucide-react';
+import { Calendar, Users, Handshake, MapPin, Smartphone, Zap } from 'lucide-react';
 
 export function FeaturesSection() {
   const features = [
     {
       icon: Calendar,
       title: "Gerenciador de Treinos",
-      description: "Calendário semanal interativo com criação de treinos personalizados e acompanhamento de progresso.",
+      description: "Organize seus treinos com calendário interativo e acompanhe seu progresso.",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Users,
       title: "Personal Trainers",
-      description: "Encontre e contrate personal trainers qualificados com perfis detalhados e sistema de agendamento.",
+      description: "Contrate profissionais qualificados com sistema de agendamento integrado.",
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: Handshake,
       title: "Duplas de Treino",
-      description: "Conecte-se com pessoas próximas para treinar juntos baseado em localização e horários.",
+      description: "Encontre parceiros de treino próximos com objetivos similares.",
       color: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: MapPin,
-      title: "Academias Próximas",
-      description: "Descubra academias na sua região com informações de horários, distância e avaliações.",
-      color: "from-orange-500 to-red-500"
-    },
-    {
-      icon: BookOpen,
-      title: "Conteúdo Educativo",
-      description: "Acesse artigos, dicas e conteúdo especializado sobre fitness, alimentação e saúde mental.",
-      color: "from-indigo-500 to-purple-500"
     },
     {
       icon: Smartphone,
@@ -68,92 +56,49 @@ export function FeaturesSection() {
           </p>
         </div>
 
-        {/* Grid de Features */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 lg:mb-20">
+        {/* Features List */}
+        <div className="space-y-8 sm:space-y-12 mb-12 sm:mb-16 lg:mb-20">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
+            const isEven = index % 2 === 0;
             return (
               <motion.div
                 key={index}
-                className="group relative bg-card-bg border border-border rounded-2xl p-8 hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2"
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-16`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
               >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
-                
-                <div className="relative">
-                  {/* Icon */}
+                {/* Content */}
+                <div className="flex-1 text-center lg:text-left">
                   <motion.div 
-                    className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 shadow-lg`}
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    className={`inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 shadow-lg`}
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <IconComponent className="w-8 h-8 text-white" />
+                    <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                   </motion.div>
                   
-                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
                     {feature.title}
                   </h3>
-                  <p className="text-text-muted leading-relaxed">
+                  <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto lg:mx-0">
                     {feature.description}
                   </p>
+                </div>
+                
+                {/* Visual Element */}
+                <div className="flex-1">
+                  <div className={`w-full h-64 sm:h-80 bg-gradient-to-br ${feature.color} rounded-2xl opacity-20 flex items-center justify-center`}>
+                    <IconComponent className="w-24 h-24 sm:w-32 sm:h-32 text-white opacity-50" />
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Highlights Section */}
-        <div className="bg-gradient-to-r from-card-bg to-card-bg/50 border border-border rounded-3xl p-12">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
-              Por que escolher a GymBee?
-            </h3>
-            <p className="text-lg text-text-muted max-w-2xl mx-auto">
-              Tecnologia que entende suas necessidades e conecta você às melhores oportunidades
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 border border-accent/20 rounded-2xl mb-6">
-                <Users className="w-8 h-8 text-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-foreground mb-3">
-                Match Inteligente
-              </h4>
-              <p className="text-text-muted">
-                Algoritmo que conecta duplas baseado em proximidade, horário e nível de treino
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 border border-accent/20 rounded-2xl mb-6">
-                <MapPin className="w-8 h-8 text-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-foreground mb-3">
-                Geolocalização Precisa
-              </h4>
-              <p className="text-text-muted">
-                Encontre academias e duplas em um raio de até 2km da sua localização
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent/10 border border-accent/20 rounded-2xl mb-6">
-                <Calendar className="w-8 h-8 text-accent" />
-              </div>
-              <h4 className="text-xl font-bold text-foreground mb-3">
-                Organização Completa
-              </h4>
-              <p className="text-text-muted">
-                Calendário semanal, treinos personalizados e acompanhamento de progresso
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

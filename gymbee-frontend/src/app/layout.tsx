@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "GymBee - Sua academia inteligente",
-  description: "Plataforma inteligente para gestão de academia e acompanhamento de treinos",
+  title: "GymBee - Sua comunidade fitness",
+  description: "Plataforma inteligente para conectar pessoas e personal trainers",
 };
 
 export default function RootLayout({

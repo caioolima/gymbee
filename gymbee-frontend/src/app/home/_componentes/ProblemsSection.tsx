@@ -8,13 +8,13 @@ export function ProblemsSection() {
     {
       icon: Users,
       title: "Treina sozinho e perde motivação",
-      description: "Mesmo indo na academia, treinar sozinho pode ser desmotivante. Você falta treinos importantes e não tem quem te incentive nos dias difíceis.",
+      description: "Treinar sozinho pode ser desmotivante. Você falta treinos importantes e não tem quem te incentive nos dias difíceis.",
       color: "from-red-500 to-pink-500"
     },
     {
       icon: MapPin,
-      title: "Não conhece academias próximas",
-      description: "Você pode estar perdendo academias melhores ou mais próximas da sua casa/trabalho. Não sabe horários, preços ou qualidade dos equipamentos.",
+      title: "Não encontra pessoas para treinar",
+      description: "Você quer treinar com alguém, mas não sabe onde encontrar pessoas com objetivos similares. Falta uma comunidade que te motive e incentive.",
       color: "from-orange-500 to-red-500"
     },
     {
@@ -50,8 +50,7 @@ export function ProblemsSection() {
             </span>
           </h2>
           <p className="text-lg sm:text-xl text-text-muted max-w-3xl mx-auto leading-relaxed">
-            Treinar sozinho pode ser desmotivante. Você precisa de uma comunidade 
-            que te incentive e ajude a manter a consistência nos treinos.
+            Esses problemas são comuns e podem estar atrapalhando seus resultados.
           </p>
         </div>
 
@@ -111,21 +110,7 @@ export function ProblemsSection() {
               Pronto para revolucionar seus treinos?
             </h3>
             <p className="text-lg text-text-muted mb-6 max-w-3xl mx-auto">
-              Encontre sua dupla perfeita, conecte-se com personal trainers e descubra academias incríveis perto de você. 
-              <span className="block mt-2">
-                <a 
-                  href="/register"
-                  className="inline-flex items-center gap-2 text-accent font-semibold hover:text-accent/80 transition-colors cursor-pointer"
-                >
-                  Sua jornada fitness começa aqui
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
-                </a>
-              </span>
+              A GymBee resolve todos esses problemas em uma única plataforma.
             </p>
           </div>
         </motion.div>

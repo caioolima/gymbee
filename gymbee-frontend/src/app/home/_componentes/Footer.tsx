@@ -18,7 +18,7 @@ export function Footer() {
             </div>
             <p className="text-text-muted mb-6 max-w-md leading-relaxed">
               A comunidade fitness que conecta pessoas para treinar juntas. 
-              Organize seus treinos, encontre duplas e descubra academias próximas em nossa plataforma.
+              Organize seus treinos, encontre duplas e conecte-se com personal trainers em nossa plataforma.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 bg-input-bg border border-border rounded-xl flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-colors">

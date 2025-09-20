@@ -30,8 +30,8 @@ export function HowItWorksSection() {
     {
       number: "04",
       icon: MapPin,
-      title: "Descubra academias",
-      description: "Encontre academias próximas e personal trainers",
+      title: "Conecte-se",
+      description: "Encontre personal trainers e duplas próximas",
       color: "from-orange-500 to-red-500"
     }
   ];
@@ -59,45 +59,45 @@ export function HowItWorksSection() {
             </span>
           </h2>
           <p className="text-xl text-text-muted max-w-3xl mx-auto leading-relaxed">
-            Simples assim: cadastre-se, defina seus objetivos, encontre sua tribo 
+            Simples assim: cadastre-se, defina seus objetivos, encontre parceiros de treino 
             e comece a evoluir junto com pessoas que realmente se importam com seus resultados.
           </p>
         </div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-8 sm:space-y-12">
           {steps.map((step, index) => {
             const IconComponent = step.icon;
+            const isEven = index % 2 === 0;
             return (
               <motion.div
                 key={index}
-                className="group relative"
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-16`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="relative bg-card-bg border border-border rounded-2xl p-8 text-center hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-2">
-                  {/* Step Number */}
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-sm font-bold">
-                      {step.number}
-                    </div>
+                {/* Step Number and Icon */}
+                <div className="flex items-center gap-6">
+                  <div className="w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold">
+                    {step.number}
                   </div>
-
-                  {/* Icon */}
                   <motion.div 
-                    className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${step.color} rounded-2xl mb-6 shadow-lg`}
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    className={`w-20 h-20 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center shadow-lg`}
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <IconComponent className="w-8 h-8 text-white" />
+                    <IconComponent className="w-10 h-10 text-white" />
                   </motion.div>
-                  
-                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors">
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1 text-center lg:text-left">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
                     {step.title}
                   </h3>
-                  <p className="text-text-muted leading-relaxed">
+                  <p className="text-lg sm:text-xl text-text-muted leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -105,23 +105,6 @@ export function HowItWorksSection() {
             );
           })}
         </div>
-
-        {/* Bottom Message */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-lg text-text-muted mb-4">
-            <strong>Pronto para começar?</strong> É rápido, fácil e gratuito!
-          </p>
-          <div className="inline-flex items-center gap-2 text-accent font-semibold">
-            <CheckCircle className="w-5 h-5" />
-            Faça parte da nossa comunidade fitness
-          </div>
-        </motion.div>
       </div>
     </section>
   );
