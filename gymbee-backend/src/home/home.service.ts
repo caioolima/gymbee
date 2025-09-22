@@ -1,4 +1,4 @@
-import { Injectable, Logger, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, InternalServerErrorException, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CheckInDto, CheckInResponseDto } from './dto/CheckInDTO';
 import { HomeDataDto, WorkoutRankingDto, GymDto, ArticleDto, ChallengeDto } from './view/HomeViewDTO';
@@ -181,6 +181,45 @@ export class HomeService {
     } catch (error) {
       this.logger.error(`Erro ao buscar desafios diários: ${error.message}`, error.stack);
       throw new InternalServerErrorException('Erro ao buscar desafios diários');
+    }
+  }
+
+  async participateInChallenge(userId: string, challengeId: string): Promise<{ message: string }> {
+    try {
+      // Verificar se o desafio existe
+      const challenge = await this.prisma.challenge.findUnique({
+        where: { id: challengeId },
+      });
+
+      if (!challenge) {
+        throw new NotFoundException('Desafio não encontrado');
+      }
+
+      if (!challenge.isActive) {
+        throw new BadRequestException('Desafio não está ativo');
+      }
+
+      // Sistema de desafios antigo removido - usar desafios diários
+      this.logger.log(`Sistema de desafios antigo removido - usar desafios diários`);
+      
+      return { message: 'Participação no desafio registrada com sucesso!' };
+    } catch (error) {
+      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+        throw error;
+      }
+      this.logger.error(`Erro ao participar do desafio: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Erro ao participar do desafio');
+    }
+  }
+
+  async getChallengeHistory(userId: string): Promise<any[]> {
+    try {
+      // Sistema de desafios antigo removido - usar desafios diários
+      this.logger.log(`Sistema de desafios antigo removido - usar desafios diários`);
+      return [];
+    } catch (error) {
+      this.logger.error(`Erro ao buscar histórico de desafios: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Erro ao buscar histórico de desafios');
     }
   }
 

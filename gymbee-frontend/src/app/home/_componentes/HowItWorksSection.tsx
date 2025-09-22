@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { UserPlus, Calendar, Users, MapPin, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { UserPlus, Calendar, Users, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { FlyingBee } from './FlyingBee';
 
 export function HowItWorksSection() {
@@ -67,15 +67,20 @@ export function HowItWorksSection() {
             <Sparkles className="w-4 h-4" />
             Como Funciona
           </motion.div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-8 leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-tight">
             Como funciona a
             <span className="block bg-gradient-to-r from-accent via-yellow-400 to-accent bg-clip-text text-transparent">
-              plataforma GymBee?
+              GymBee?
             </span>
           </h2>
-          <p className="text-xl text-text-muted max-w-4xl mx-auto leading-relaxed">
-            Nossa tecnologia inteligente conecta você automaticamente com pessoas compatíveis. 
-            Veja como é simples começar a treinar com a dupla perfeita.
+          <p className="text-base sm:text-lg lg:text-xl text-text-muted max-w-4xl mx-auto leading-relaxed font-medium">
+            <span className="hidden sm:inline">
+              Nossa tecnologia inteligente conecta você automaticamente com pessoas compatíveis. 
+              Veja como é simples começar a treinar com a dupla perfeita.
+            </span>
+            <span className="sm:hidden">
+              Conecte-se automaticamente com pessoas compatíveis e treine com a dupla perfeita.
+            </span>
           </p>
         </motion.div>
 
@@ -90,7 +95,7 @@ export function HowItWorksSection() {
               return (
                 <motion.div
                   key={index}
-                  className="group relative"
+                  className={`group relative ${index >= 3 ? 'hidden sm:block' : ''}`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -137,7 +142,7 @@ export function HowItWorksSection() {
                     <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
                       {step.title}
                     </h3>
-                    <p className="text-base text-text-muted leading-relaxed">
+                    <p className="text-base sm:text-lg text-text-muted leading-relaxed">
                       {step.description}
                     </p>
                     

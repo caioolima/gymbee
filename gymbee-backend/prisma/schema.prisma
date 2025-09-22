@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator seed {
+  provider = "ts-node"
+  output   = "./seed.ts"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -44,6 +49,23 @@ enum ContractStatus {
   CANCELLED
 }
 
+enum WorkoutType {
+  STRENGTH
+  CARDIO
+  FLEXIBILITY
+  MIXED
+}
+
+enum AchievementType {
+  WELCOME_TO_HIVE
+  FIRST_WORKOUT
+  WEEK_STREAK
+  MONTH_STREAK
+  WEIGHT_GOAL
+  CONSISTENCY
+  MILESTONE
+}
+
 model User {
   id           String   @id @default(uuid())
   fullName     String
@@ -54,11 +76,16 @@ model User {
   gender       String
   role         Role
   cpf          String  @unique
+  phone        String?
   trainer      Trainer?
   goals        UserGoal[]
   swipes       TrainerSwipe[]
   contracts    Contract[]
   checkIns     GymCheckIn[]
+  workouts     Workout[]
+  achievements UserAchievement[]
+  weightEntries WeightEntry[]
+  dailyChallenges DailyChallenge[]
   createdAt    DateTime @default(now())
 }
 
@@ -83,10 +110,48 @@ model UserGoal {
   targetWeight      Float
   height            Float
   activityLevel     ActivityLevel
-  deadline          DateTime
+  deadline          DateTime?
   experienceLevel   ExperienceLevel
+  isActive          Boolean        @default(true)
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
+}
+
+model Challenge {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  goalType    GoalType  // Tipo de objetivo que o desafio é direcionado
+  points      Int       @default(10) // Pontos que o usuário ganha ao completar
+  duration    Int       @default(7) // Duração em dias
+  difficulty  String    @default("MEDIUM") // EASY, MEDIUM, HARD
+  category    String    @default("GENERAL") // Categoria do desafio
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relações
+  dailyChallenges DailyChallenge[]
+
+  @@unique([title, goalType])
+}
+
+
+model DailyChallenge {
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+  challengeId String
+  challenge   Challenge  @relation(fields: [challengeId], references: [id])
+  date        DateTime   @default(now())
+  isAccepted  Boolean    @default(false)
+  isCompleted Boolean    @default(false)
+  completedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@unique([userId, date])
+  @@index([userId, date])
 }
 
 model Service {
@@ -180,13 +245,45 @@ model Article {
   createdAt   DateTime @default(now())
 }
 
-model Challenge {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  duration    Int      // em minutos
-  difficulty  String
-  category    String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
+
+
+model Workout {
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+  type          WorkoutType
+  name          String
+  description   String?
+  duration      Int        // em minutos
+  calories      Int?       // calorias queimadas estimadas
+  exercises     Json?      // lista de exercícios (flexível)
+  notes         String?    // observações do usuário
+  scheduledDate DateTime?  // data agendada para o treino (opcional)
+  isCompleted   Boolean    @default(false) // se o treino foi realizado
+  completedAt   DateTime?  // quando foi marcado como completo
+  source        String     @default("user-created") // origem do treino: "template" ou "user-created"
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model UserAchievement {
+  id            String         @id @default(uuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  type          AchievementType
+  title         String
+  description   String
+  icon          String?        // nome do ícone
+  unlockedAt    DateTime       @default(now())
+  isRead        Boolean        @default(false)
+  metadata      Json?          // dados extras (ex: valor da conquista)
+}
+
+model WeightEntry {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  weight    Float    // peso em kg
+  notes     String?  // observações opcionais
+  createdAt DateTime @default(now())
 }

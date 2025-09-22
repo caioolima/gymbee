@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, Mail, Phone, MapPin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -11,14 +11,15 @@ export function Footer() {
           {/* Logo e Descrição */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-accent to-yellow-400 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
-              </div>
-              <span className="text-2xl font-bold text-foreground">GymBee</span>
+              <img 
+                src="/images/logo-gymbee.svg" 
+                alt="GymBee" 
+                className="h-8 w-auto"
+              />
             </div>
             <p className="text-text-muted mb-6 max-w-md leading-relaxed">
               A comunidade fitness que conecta pessoas para treinar juntas. 
-              Organize seus treinos, encontre duplas e conecte-se com personal trainers em nossa plataforma.
+              Organize seus treinos, encontre duplas e conecte-se com personal trainers em nosso app.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 bg-input-bg border border-border rounded-xl flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-colors">
@@ -29,20 +30,25 @@ export function Footer() {
 
           {/* Links Rápidos */}
           <div>
-            <h3 className="text-lg font-bold text-foreground mb-6">Links Rápidos</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-6">Links Rápidos</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="#home" className="text-text-muted hover:text-accent transition-colors">
-                  Início
+                  Treine Melhor
                 </Link>
               </li>
               <li>
                 <Link href="#features" className="text-text-muted hover:text-accent transition-colors">
-                  Funcionalidades
+                  Soluções
                 </Link>
               </li>
               <li>
-                <Link href="#problems" className="text-text-muted hover:text-accent transition-colors">
+                <Link href="#why-gymbee" className="text-text-muted hover:text-accent transition-colors">
+                  Por que GymBee
+                </Link>
+              </li>
+              <li>
+                <Link href="#how-it-works" className="text-text-muted hover:text-accent transition-colors">
                   Como Funciona
                 </Link>
               </li>
@@ -51,12 +57,17 @@ export function Footer() {
                   Entrar
                 </Link>
               </li>
+              <li>
+                <Link href="/register" className="text-text-muted hover:text-accent transition-colors">
+                  Cadastrar
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Contato */}
           <div>
-            <h3 className="text-lg font-bold text-foreground mb-6">Contato</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-6">Contato</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent" />
@@ -88,11 +99,6 @@ export function Footer() {
                 Termos de Uso
               </Link>
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-2 mt-4">
-            <span className="text-text-muted text-sm">Feito com</span>
-            <Heart className="w-4 h-4 text-red-500" />
-            <span className="text-text-muted text-sm">para nossa comunidade fitness</span>
           </div>
         </div>
       </div>

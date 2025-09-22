@@ -6,6 +6,7 @@ import { UserViewDto } from './view/UserViewDTO';
 import { JwtAuthService } from './jwt.service';
 import { GoogleOAuthService } from './google-oauth.service';
 import { LoginDto, GoogleLoginDto, AuthResponseDto } from './dto/LoginDTO';
+import { AchievementsService } from '../achievements/achievements.service';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,7 @@ export class AuthService {
         private prisma: PrismaService,
         private jwtAuthService: JwtAuthService,
         private googleOAuthService: GoogleOAuthService,
+        private achievementsService: AchievementsService,
     ) { }
 
     private validateCPF(cpf: string): boolean {
@@ -59,6 +61,7 @@ export class AuthService {
         password: string;
         gender: string;
         cpf: string;
+        phone?: string;
     }): Promise<AuthResponseDto> {
         if (!this.validateCPF(data.cpf)) {
             throw new BadRequestException('CPF inválido');
@@ -91,11 +94,26 @@ export class AuthService {
                     passwordHash,
                     role: 'USER',
                     cpf: data.cpf,
+                    phone: data.phone,
                 },
             });
 
             const accessToken = this.jwtAuthService.generateToken(user);
             const expiresIn = this.jwtAuthService.getTokenExpirationTime();
+
+            // Criar conquista de cadastro
+            try {
+                await this.achievementsService.createAchievement(
+                    user.id,
+                    'WELCOME_TO_HIVE',
+                    'Bem-vindo à GymBee!',
+                    'Sua jornada fitness começa agora. Conecte-se com trainers, defina metas e transforme seu corpo.',
+                    'Zap',
+                    { registrationDate: new Date() }
+                );
+            } catch (achievementError) {
+                this.logger.warn(`Erro ao criar conquista de boas-vindas para ${user.username}: ${achievementError}`);
+            }
 
             this.logger.log(`Usuário criado com sucesso: ${user.username}`);
             
@@ -129,6 +147,7 @@ export class AuthService {
         gender: string;
         cpf: string;
         cref: string;
+        phone?: string;
     }): Promise<AuthResponseDto> {
         const existingUser = await this.prisma.user.findFirst({
             where: {
@@ -160,6 +179,7 @@ export class AuthService {
                     passwordHash,
                     role: 'TRAINER',
                     cpf: data.cpf,
+                    phone: data.phone,
                 },
             });
 
@@ -172,6 +192,20 @@ export class AuthService {
 
             const accessToken = this.jwtAuthService.generateToken(user);
             const expiresIn = this.jwtAuthService.getTokenExpirationTime();
+
+            // Criar conquista de cadastro para trainer
+            try {
+                await this.achievementsService.createAchievement(
+                    user.id,
+                    'WELCOME_TO_HIVE',
+                    'Bem-vindo à GymBee!',
+                    'Sua jornada fitness começa agora. Conecte-se com trainers, defina metas e transforme seu corpo.',
+                    'Zap',
+                    { registrationDate: new Date(), role: 'TRAINER' }
+                );
+            } catch (achievementError) {
+                this.logger.warn(`Erro ao criar conquista de boas-vindas para trainer ${user.username}: ${achievementError}`);
+            }
 
             this.logger.log(`Personal trainer criado com sucesso: ${user.username}`);
             

@@ -53,6 +53,12 @@ export class GoalViewDto {
   @ApiProperty({ description: 'Peso a perder/ganhar em kg' })
   weightDifference: number;
 
-  @ApiProperty({ description: 'Dias restantes para o prazo' })
-  daysRemaining: number;
+  @ApiProperty({ description: 'Dias restantes para o prazo (null se sem prazo)' })
+  daysRemaining: number | null;
+
+  @ApiProperty({ description: 'Progresso percentual do objetivo (0-100)' })
+  progress: number;
+
+  @ApiProperty({ description: 'Se o objetivo está ativo' })
+  isActive: boolean;
 }

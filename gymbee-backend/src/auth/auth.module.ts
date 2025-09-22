@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller';
 import { JwtAuthService } from './jwt.service';
 import { GoogleOAuthService } from './google-oauth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AchievementsService } from '../achievements/achievements.service';
 
 @Module({
   imports: [
@@ -14,10 +15,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'your-secret-key',
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '24h' },
     }),
   ],
-  providers: [AuthService, JwtAuthService, GoogleOAuthService, JwtStrategy],
+  providers: [AuthService, JwtAuthService, GoogleOAuthService, JwtStrategy, AchievementsService],
   controllers: [AuthController],
   exports: [AuthService, JwtAuthService],
 })

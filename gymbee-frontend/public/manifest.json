@@ -1,0 +1,69 @@
+{
+  "name": "GymBee - Conecte-se e Treine Melhor",
+  "short_name": "GymBee",
+  "description": "A primeira solução brasileira que conecta pessoas da mesma academia para treinar juntas. Pare de treinar sozinho e acelere seus resultados.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#fbbf24",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/images/logo-gymbee.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo-gymbee.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo-gymbee.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/og-image.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Entrar",
+      "short_name": "Login",
+      "description": "Faça login na sua conta",
+      "url": "/login",
+      "icons": [
+        {
+          "src": "/images/logo-gymbee.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Cadastrar",
+      "short_name": "Register",
+      "description": "Crie sua conta gratuita",
+      "url": "/register",
+      "icons": [
+        {
+          "src": "/images/logo-gymbee.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

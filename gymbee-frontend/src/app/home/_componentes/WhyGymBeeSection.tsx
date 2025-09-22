@@ -1,14 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Target, Users, MapPin, Calendar, Zap, Shield, Star, CheckCircle, ArrowRight } from 'lucide-react';
+import { Target, Users, MapPin, Calendar, Shield, Star, CheckCircle, ArrowRight } from 'lucide-react';
 
 export function WhyGymBeeSection() {
   const differentiators = [
     {
       icon: Target,
       title: "Única no Brasil",
-      description: "Primeira plataforma especializada em duplas de treino.",
+      description: "Primeiro app especializado em duplas de treino.",
       color: "from-blue-500 to-cyan-500",
       gradient: "from-blue-400/20 to-cyan-400/20",
       benefits: ["Pioneira no mercado", "Especialização fitness", "Comunidade exclusiva"]
@@ -32,7 +32,7 @@ export function WhyGymBeeSection() {
     {
       icon: Calendar,
       title: "Gratuito + Premium",
-      description: "Plataforma gratuita com funcionalidades premium para quem quer mais.",
+      description: "Solução gratuita com funcionalidades premium para quem quer mais.",
       color: "from-orange-500 to-red-500",
       gradient: "from-orange-400/20 to-red-400/20",
       benefits: ["100% gratuito", "Recursos extras", "Sua escolha"]
@@ -64,17 +64,24 @@ export function WhyGymBeeSection() {
             <Star className="w-4 h-4" />
             Por que escolher a GymBee?
           </motion.div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
             Por que milhares escolhem
             <span className="block bg-gradient-to-r from-accent via-yellow-400 to-accent bg-clip-text text-transparent">
               a GymBee?
             </span>
           </h2>
-          <p className="text-xl sm:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed">
-            Conecte-se com pessoas da sua rede de academia, acesse sessões profissionais, desafios diários e artigos de dieta. 
-            <span className="text-accent font-semibold"> Treinos práticos</span> e 
-            <span className="text-accent font-semibold"> resultados reais</span> são nossa especialidade. 
-            Comece gratuitamente e descubra uma nova forma de treinar.
+          <p className="text-base sm:text-lg lg:text-xl text-text-muted max-w-4xl mx-auto leading-relaxed font-medium">
+            <span className="hidden sm:inline">
+              Entenda porque milhares de pessoas escolheram a GymBee para transformar seus treinos. 
+              <span className="text-accent font-semibold"> Pioneira no Brasil</span>
+              <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent">,</span> 
+              <span className="text-accent font-semibold"> 100% segura</span> e 
+              <span className="text-accent font-semibold"> resultados comprovados</span>
+              <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent">.</span>
+            </span>
+            <span className="sm:hidden">
+              Entenda porque milhares de pessoas escolheram a GymBee para transformar seus treinos.
+            </span>
           </p>
         </motion.div>
 
@@ -84,7 +91,7 @@ export function WhyGymBeeSection() {
             return (
               <motion.div
                 key={item.title}
-                className="group relative"
+                className={`group relative ${index >= 2 ? 'hidden sm:block' : ''}`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -108,7 +115,7 @@ export function WhyGymBeeSection() {
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-base sm:text-lg text-text-muted leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg text-text-muted leading-relaxed mb-6 font-medium">
                     {item.description}
                   </p>
                   
@@ -153,19 +160,25 @@ export function WhyGymBeeSection() {
             <div className="absolute top-1/2 left-6 w-2 h-2 bg-accent/20 rounded-full"></div>
             
             <div className="relative">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4 sm:mb-6">
                 Pronto para uma 
-                <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent"> transformação</span>?
+                <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent"> transformação</span>
+                <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent">?</span>
               </h3>
-              <p className="text-lg sm:text-xl text-text-muted mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
-                Comece gratuitamente e descubra como milhares transformaram seus treinos. 
-                Acesso completo a matching, sessões, desafios e artigos de dieta.
+              <p className="text-base sm:text-lg lg:text-xl text-text-muted mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed font-medium">
+                <span className="hidden sm:inline">
+                  Comece gratuitamente e descubra como milhares transformaram seus treinos. 
+                  Acesso completo a matching, sessões, desafios e artigos de dieta.
+                </span>
+                <span className="sm:hidden">
+                  Comece gratuitamente e descubra como milhares transformaram seus treinos.
+                </span>
               </p>
               
               <div className="flex justify-center">
                 <motion.a 
                   href="/register"
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-yellow-300 text-white font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-yellow-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 hover:scale-105"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

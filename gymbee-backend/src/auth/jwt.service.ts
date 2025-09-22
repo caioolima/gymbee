@@ -29,8 +29,8 @@ export class JwtAuthService {
     }
 
     getTokenExpirationTime(): number {
-        // 1 hora em segundos
-        return 3600;
+        // 24 horas em segundos
+        return 86400;
     }
 }
 

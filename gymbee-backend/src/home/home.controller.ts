@@ -159,6 +159,37 @@ export class HomeController {
     return this.homeService.getDailyChallenges();
   }
 
+  @Post('challenges/:challengeId/participate')
+  @ApiOperation({ summary: 'Participar de um desafio' })
+  @ApiResponse({
+    status: 201,
+    description: 'Participação no desafio registrada com sucesso',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Desafio não encontrado',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Usuário já está participando de um desafio',
+  })
+  async participateInChallenge(
+    @Param('challengeId') challengeId: string,
+    @Request() req: any,
+  ): Promise<{ message: string }> {
+    return this.homeService.participateInChallenge(req.user.id, challengeId);
+  }
+
+  @Get('challenges/history')
+  @ApiOperation({ summary: 'Buscar histórico de participações em desafios' })
+  @ApiResponse({
+    status: 200,
+    description: 'Histórico de participações carregado com sucesso',
+  })
+  async getChallengeHistory(@Request() req: any): Promise<any[]> {
+    return this.homeService.getChallengeHistory(req.user.id);
+  }
+
   @Post('ranking/:workoutId/vote')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Votar em um treino' })

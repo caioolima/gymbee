@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Zap, Shield, Clock, Star, Users, Target } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Shield, Clock, Star, Target, Zap as Lightning } from 'lucide-react';
 
 export function CTASection() {
   const benefits = [
     { icon: CheckCircle, text: "Totalmente gratuito", color: "text-green-500" },
     { icon: Shield, text: "Sem compromisso", color: "text-blue-500" },
-    { icon: Clock, text: "Resultados em 7 dias", color: "text-purple-500" },
+    { icon: Clock, text: "Acesso imediato", color: "text-purple-500" },
     { icon: Zap, text: "Funcionalidades pagas", color: "text-yellow-500" }
   ];
 
@@ -43,16 +43,22 @@ export function CTASection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
-              Transforme seus treinos
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
+              Comece hoje e veja
               <span className="block bg-gradient-to-r from-accent via-yellow-400 to-accent bg-clip-text text-transparent">
-                hoje mesmo!
+                a diferença!
               </span>
             </h2>
 
-            <p className="text-xl sm:text-2xl text-text-muted mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed">
-              Conecte-se com pessoas da sua rede de academia, acesse sessões profissionais, desafios diários e artigos de dieta. 
-              Treinos práticos e resultados reais são nossa especialidade. Comece gratuitamente hoje!
+            <p className="text-base sm:text-lg lg:text-xl text-text-muted mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
+              <span className="hidden sm:inline">
+                Conecte-se, treine melhor e alcance seus objetivos. 
+                <br />
+                <span className="text-accent font-semibold">Cadastre-se gratuitamente</span> e descubra uma nova forma de treinar.
+              </span>
+              <span className="sm:hidden">
+                <span className="text-accent font-semibold">Cadastre-se gratuitamente</span> e descubra uma nova forma de treinar.
+              </span>
             </p>
           </motion.div>
 
@@ -89,7 +95,7 @@ export function CTASection() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/register"
-                className="group bg-gradient-to-r from-accent to-yellow-300 hover:from-accent/90 hover:to-yellow-300/90 text-white font-bold py-4 sm:py-5 lg:py-6 px-8 sm:px-10 lg:px-12 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background flex items-center justify-center gap-3 shadow-2xl hover:shadow-accent/25 text-base sm:text-lg lg:text-xl"
+                className="group bg-gradient-to-r from-accent to-yellow-300 hover:from-accent/90 hover:to-yellow-300/90 text-black font-bold py-4 sm:py-5 lg:py-6 px-8 sm:px-10 lg:px-12 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background flex items-center justify-center gap-3 shadow-2xl hover:shadow-accent/25 text-base sm:text-lg lg:text-xl"
               >
                 <Target className="w-5 h-5 sm:w-6 sm:h-6" />
                 <span>Começar Grátis Agora</span>
@@ -106,8 +112,9 @@ export function CTASection() {
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-sm text-text-muted mb-4">
-              ⚡ Últimas 24h: 47 novas duplas formadas
+            <p className="text-sm text-text-muted text-center mb-4 flex items-center justify-center gap-2">
+              <Lightning className="w-4 h-4 text-accent" />
+              Últimas 24h: 47 novas duplas formadas
             </p>
             <div className="flex justify-center items-center gap-2 text-accent">
               <Star className="w-4 h-4 fill-current" />

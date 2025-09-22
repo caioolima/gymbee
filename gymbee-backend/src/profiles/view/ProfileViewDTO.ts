@@ -213,7 +213,7 @@ export class UserAnalyticsDto {
   bestStreak: number;
 }
 
-export class TrainerProfileDto {
+export class TrainerAnalyticsProfileDto {
   @ApiProperty({ description: 'ID do trainer' })
   id: string;
 

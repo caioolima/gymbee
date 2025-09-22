@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProfilesService } from './profiles.service';
-import { UserProfileDto, TrainerProfileDto, UserAnalyticsDto, TrainerAnalyticsDto } from './view/ProfileViewDTO';
+import { UserProfileDto, TrainerAnalyticsProfileDto, UserAnalyticsDto, TrainerAnalyticsDto } from './view/ProfileViewDTO';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('Perfis e Análises')
@@ -52,13 +52,13 @@ export class ProfilesController {
   @ApiResponse({
     status: 200,
     description: 'Perfil do trainer carregado com sucesso',
-    type: TrainerProfileDto,
+    type: TrainerAnalyticsProfileDto,
   })
   @ApiResponse({
     status: 404,
     description: 'Personal trainer não encontrado',
   })
-  async getTrainerProfile(@Param('id') trainerId: string): Promise<TrainerProfileDto> {
+  async getTrainerProfile(@Param('id') trainerId: string): Promise<TrainerAnalyticsProfileDto> {
     return this.profilesService.getTrainerProfile(trainerId);
   }
 
@@ -82,7 +82,7 @@ export class ProfilesController {
   @ApiResponse({
     status: 200,
     description: 'Perfil do trainer carregado com sucesso',
-    type: TrainerProfileDto,
+    type: TrainerAnalyticsProfileDto,
   })
   @ApiResponse({
     status: 403,
@@ -92,7 +92,7 @@ export class ProfilesController {
     status: 404,
     description: 'Personal trainer não encontrado',
   })
-  async getMyTrainerProfile(@Request() req: any): Promise<TrainerProfileDto> {
+  async getMyTrainerProfile(@Request() req: any): Promise<TrainerAnalyticsProfileDto> {
     if (req.user.role !== 'TRAINER') {
       throw new Error('Acesso negado - apenas trainers podem acessar');
     }

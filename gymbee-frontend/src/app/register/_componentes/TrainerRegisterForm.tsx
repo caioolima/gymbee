@@ -2,12 +2,17 @@
 
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 interface TrainerRegisterFormProps {
-  onSuccess?: () => void;
+  onSuccess?: (data: any) => void;
 }
 
 export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
+  const { registerTrainer } = useAuth();
+  const router = useRouter();
+  
   const [formData, setFormData] = useState({
     email: '',
     fullName: '',
@@ -15,11 +20,14 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
     password: '',
     confirmPassword: '',
     cref: '',
+    cpf: '',
+    gender: 'M',
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -29,6 +37,18 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
       const formattedValue = value
         .replace(/\D/g, '') // Remove all non-digits
         .replace(/(\d{6})(\d)/, '$1-$2'); // Add dash after 6 digits
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: formattedValue
+      }));
+    } else if (name === 'cpf') {
+      // Format CPF
+      const formattedValue = value
+        .replace(/\D/g, '') // Remove all non-digits
+        .replace(/(\d{3})(\d)/, '$1.$2') // Add first dot
+        .replace(/(\d{3})(\d)/, '$1.$2') // Add second dot
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Add dash
       
       setFormData(prev => ({
         ...prev,
@@ -85,6 +105,12 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
       newErrors.cref = 'CREF deve estar no formato 000000-AA';
     }
 
+    if (!formData.cpf.trim()) {
+      newErrors.cpf = 'CPF é obrigatório';
+    } else if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(formData.cpf)) {
+      newErrors.cpf = 'CPF deve estar no formato 000.000.000-00';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -96,20 +122,31 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
       return;
     }
 
+    setIsSubmitting(true);
+    
     try {
-      // TODO: Implementar chamada para API do backend
-      console.log('Dados do personal trainer:', {
-        ...formData,
-        role: 'TRAINER'
-      });
+      // Preparar dados para envio (remover confirmPassword e formatar CPF)
+      const { confirmPassword, ...trainerData } = formData;
+      const cpfNumbers = trainerData.cpf.replace(/\D/g, '');
       
-      // Chamar função de sucesso para ir para próxima tela
+      const registrationData = {
+        ...trainerData,
+        cpf: cpfNumbers,
+        // birthDate será adicionada na próxima etapa
+      };
+
+      console.log('Dados preparados para cadastro:', registrationData);
+      
+      // Chamar função de sucesso para ir para próxima tela com os dados
       if (onSuccess) {
-        onSuccess();
+        onSuccess(registrationData);
       }
     } catch (error) {
       console.error('Erro no cadastro:', error);
-      alert('Erro ao realizar cadastro. Tente novamente.');
+      const errorMessage = error instanceof Error ? error.message : 'Erro ao realizar cadastro. Tente novamente.';
+      setErrors({ submit: errorMessage });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -214,6 +251,23 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
           {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
         </div>
 
+        {/* CPF */}
+        <div>
+          <input
+            type="text"
+            id="cpf"
+            name="cpf"
+            value={formData.cpf}
+            onChange={handleInputChange}
+            placeholder="000.000.000-00"
+            maxLength={14}
+            className={`w-full px-4 py-3 bg-input-bg border rounded-lg text-foreground placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${
+              errors.cpf ? 'border-red-500' : 'border-input-border'
+            }`}
+          />
+          {errors.cpf && <p className="text-red-500 text-sm mt-1">{errors.cpf}</p>}
+        </div>
+
         {/* CREF */}
         <div>
           <input
@@ -231,12 +285,38 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
           {errors.cref && <p className="text-red-500 text-sm mt-1">{errors.cref}</p>}
         </div>
 
+        {/* Gênero */}
+        <div>
+          <select
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleInputChange}
+            className={`w-full px-4 py-3 bg-input-bg border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${
+              errors.gender ? 'border-red-500' : 'border-input-border'
+            }`}
+          >
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="Outro">Outro</option>
+          </select>
+          {errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender}</p>}
+        </div>
+
+        {/* Error Message */}
+        {errors.submit && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            {errors.submit}
+          </div>
+        )}
+
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background cursor-pointer"
+          disabled={isSubmitting}
+          className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background cursor-pointer"
         >
-          Próximo
+          {isSubmitting ? 'Criando conta...' : 'Próximo'}
         </button>
       </form>
     </div>

@@ -9,6 +9,12 @@ import { HomeModule } from './home/home.module';
 import { TrainersModule } from './trainers/trainers.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { HealthModule } from './health/health.module';
+import { WorkoutsModule } from './workouts/workouts.module';
+import { AchievementsModule } from './achievements/achievements.module';
+import { WeightTrackingModule } from './weight-tracking/weight-tracking.module';
+import { DailyChallengesModule } from './daily-challenges/daily-challenges.module';
+import { ActivitiesModule } from './activities/activities.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -28,6 +34,12 @@ import { HealthModule } from './health/health.module';
     TrainersModule,
     ProfilesModule,
     HealthModule,
+    WorkoutsModule,
+    AchievementsModule,
+    WeightTrackingModule,
+    DailyChallengesModule,
+    ActivitiesModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

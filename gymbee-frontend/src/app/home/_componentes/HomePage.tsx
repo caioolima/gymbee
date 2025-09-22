@@ -2,8 +2,7 @@
 
 import { Header } from './Header';
 import { HeroSection } from './HeroSection';
-import { ProblemsSection } from './ProblemsSection';
-import { FeaturesSection } from './FeaturesSection';
+import { SolutionsSection } from './SolutionsSection';
 import { WhyGymBeeSection } from './WhyGymBeeSection';
 import { HowItWorksSection } from './HowItWorksSection';
 import { CTASection } from './CTASection';
@@ -14,8 +13,7 @@ export function HomePage() {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
-      <ProblemsSection />
-      <FeaturesSection />
+      <SolutionsSection />
       <WhyGymBeeSection />
       <HowItWorksSection />
       <CTASection />

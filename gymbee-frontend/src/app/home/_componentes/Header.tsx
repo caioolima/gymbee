@@ -12,8 +12,7 @@ export function Header() {
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#problems', label: 'Problemas' },
+    { href: '#home', label: 'Treine Melhor' },
     { href: '#features', label: 'Soluções' },
     { href: '#why-gymbee', label: 'Por que GymBee' },
     { href: '#how-it-works', label: 'Como Funciona' },
@@ -25,7 +24,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 20);
       
       // Scroll spy
-      const sections = ['home', 'problems', 'features', 'why-gymbee', 'how-it-works', 'cta'];
+      const sections = ['home', 'features', 'why-gymbee', 'how-it-works', 'cta'];
       let current = 'home';
       
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -156,9 +155,9 @@ export function Header() {
             >
               <Link
                 href="/register"
-                className="bg-accent hover:bg-accent/90 text-white font-semibold py-2 px-4 lg:px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent/25 cursor-pointer text-sm lg:text-base"
+                className="bg-accent hover:bg-accent/90 text-black font-semibold py-2 px-4 lg:px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent/25 cursor-pointer text-sm lg:text-base"
               >
-                Começar Grátis
+                Começar Grátis Agora
               </Link>
             </motion.div>
           </div>
@@ -263,9 +262,9 @@ export function Header() {
               >
                 <Link
                   href="/register"
-                  className="block w-full text-center bg-accent hover:bg-accent/90 text-white font-semibold py-4 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-accent/25 cursor-pointer text-lg"
+                  className="block w-full text-center bg-accent hover:bg-accent/90 text-black font-semibold py-4 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-accent/25 cursor-pointer text-lg"
                 >
-                  Começar Grátis
+                  Começar Grátis Agora
                 </Link>
               </motion.div>
             </div>

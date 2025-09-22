@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { UserProfileDto, TrainerProfileDto, UserAnalyticsDto, TrainerAnalyticsDto, UserGoalSummaryDto, WeeklyWorkoutDto } from './view/ProfileViewDTO';
+import { UserProfileDto, TrainerAnalyticsProfileDto, UserAnalyticsDto, TrainerAnalyticsDto, UserGoalSummaryDto, WeeklyWorkoutDto } from './view/ProfileViewDTO';
 import { GoalType, ActivityLevel, ExperienceLevel, ContractStatus } from '@prisma/client';
 
 @Injectable()
@@ -77,7 +77,7 @@ export class ProfilesService {
         const currentBMI = this.calculateBMI(goal.currentWeight, goal.height);
         const targetBMI = this.calculateBMI(goal.targetWeight, goal.height);
         const weightDifference = goal.targetWeight - goal.currentWeight;
-        const daysRemaining = this.calculateDaysRemaining(goal.deadline);
+        const daysRemaining = goal.deadline ? this.calculateDaysRemaining(goal.deadline) : 0;
 
         activeGoal = {
           id: goal.id,
@@ -87,7 +87,7 @@ export class ProfilesService {
           height: goal.height,
           activityLevel: goal.activityLevel,
           experienceLevel: goal.experienceLevel,
-          deadline: goal.deadline,
+          deadline: goal.deadline || new Date(),
           currentBMI,
           targetBMI,
           weightDifference,
@@ -153,7 +153,7 @@ export class ProfilesService {
     }
   }
 
-  async getTrainerProfile(trainerId: string): Promise<TrainerProfileDto> {
+  async getTrainerProfile(trainerId: string): Promise<TrainerAnalyticsProfileDto> {
     try {
       const trainer = await this.prisma.trainer.findUnique({
         where: { id: trainerId },

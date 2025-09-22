@@ -22,7 +22,7 @@ export function FlyingBee() {
 
   return (
     <motion.div
-      className="absolute z-10"
+      className="absolute z-10 hidden sm:block"
       style={{
         top: '25%',
         right: '15%',
