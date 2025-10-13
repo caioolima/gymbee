@@ -1,53 +1,52 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSimpleAuth } from '@/hooks/useSimpleAuth';
+import { useEffect, useState } from 'react';
 
 interface SimpleAuthGuardProps {
   children: React.ReactNode;
+  redirectTo?: string;
 }
 
-export function SimpleAuthGuard({ children }: SimpleAuthGuardProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+export function SimpleAuthGuard({ 
+  children, 
+  redirectTo = '/login' 
+}: SimpleAuthGuardProps) {
+  const { isAuthenticated, isLoading } = useSimpleAuth();
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('auth_token');
-      const user = localStorage.getItem('auth_user');
+    setMounted(true);
+  }, []);
 
-      if (!token || !user) {
-        console.log('Não autenticado, redirecionando para login...');
-        router.replace('/login');
-        return;
-      }
+  useEffect(() => {
+    // Se não está carregando e não está autenticado, redirecionar
+    if (mounted && !isLoading && isAuthenticated === false) {
+      router.replace(redirectTo);
+    }
+  }, [isAuthenticated, isLoading, router, redirectTo, mounted]);
 
-      try {
-        // Verificar se o JSON do usuário é válido
-        JSON.parse(user);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.log('Dados de usuário inválidos, redirecionando para login...');
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_user');
-        router.replace('/login');
-        return;
-      }
+  // Evitar hidratação mismatch - renderizar sempre o mesmo no servidor
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-text-muted">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
-      setIsLoading(false);
-    };
-
-    checkAuth();
-  }, [router]);
-
-  // Se ainda está carregando, mostrar loading mínimo
+  // Se está carregando, mostrar loading mínimo
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-text-muted">Verificando autenticação...</p>
+          <p className="text-text-muted">Carregando...</p>
         </div>
       </div>
     );

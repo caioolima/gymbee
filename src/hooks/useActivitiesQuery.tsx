@@ -1,25 +1,14 @@
-'use client';
-
 import { useQuery } from '@tanstack/react-query';
-import { apiService } from '../services/api';
+import { apiService } from '@/services/api';
 import { useAuth } from './useAuth';
 
 export interface Activity {
   id: string;
-  type: 'workout' | 'weight' | 'achievement' | 'challenge';
+  type: 'workout' | 'achievement' | 'goal' | 'checkin';
   title: string;
   description: string;
-  date: string;
-  metadata: {
-    workoutType?: string;
-    source?: string;
-    weight?: number;
-    notes?: string;
-    achievementType?: string;
-    isRead?: boolean;
-    points?: number;
-    isCompleted?: boolean;
-  };
+  metadata?: Record<string, any>;
+  createdAt: string;
 }
 
 export function useActivities(limit?: number) {
@@ -29,18 +18,15 @@ export function useActivities(limit?: number) {
     data: activities,
     isLoading,
     error,
-    refetch,
   } = useQuery({
     queryKey: ['activities', limit],
     queryFn: () => apiService.getRecentActivities(token, limit),
-    staleTime: 2 * 60 * 1000, // 2 minutos
     enabled: !!token,
   });
 
   return {
-    activities: activities || [],
+    activities,
     isLoading,
     error,
-    refetch,
   };
 }

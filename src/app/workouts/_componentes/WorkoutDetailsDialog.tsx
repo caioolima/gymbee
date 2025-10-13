@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, Dumbbell, Activity, Zap, Target, CheckCircle, Circle, Calendar } from 'lucide-react';
+import { X, Clock, Dumbbell, Activity, Zap, Target, CheckCircle, Circle, Calendar, Trash2 } from 'lucide-react';
 import { Workout, WorkoutType } from '@/types/workouts';
 
 interface WorkoutDetailsDialogProps {
@@ -13,6 +13,7 @@ interface WorkoutDetailsDialogProps {
   getWorkoutTypeIcon: (type: WorkoutType) => any;
   getWorkoutTypeColor: (type: WorkoutType) => string;
   onMarkAsCompleted?: (workoutId: string) => void;
+  onDeleteWorkout?: (workoutId: string) => void;
   isMarkingComplete?: boolean;
 }
 
@@ -25,6 +26,7 @@ export function WorkoutDetailsDialog({
   getWorkoutTypeIcon,
   getWorkoutTypeColor,
   onMarkAsCompleted,
+  onDeleteWorkout,
   isMarkingComplete = false
 }: WorkoutDetailsDialogProps) {
   const dayName = day.toLocaleDateString('pt-BR', { weekday: 'long' });
@@ -194,7 +196,18 @@ export function WorkoutDetailsDialog({
                               </div>
                             )}
                           </div>
-                          <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+                          <div className="flex flex-col items-end gap-2">
+                            <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+                            {onDeleteWorkout && (
+                              <button
+                                onClick={() => onDeleteWorkout(workout.id)}
+                                className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs font-medium rounded-lg transition-all duration-200 cursor-pointer flex items-center gap-1.5 w-fit"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                Excluir
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </motion.div>
                     );
@@ -269,15 +282,26 @@ export function WorkoutDetailsDialog({
                           </div>
                           <div className="flex flex-col items-end gap-2">
                             <Circle className="w-6 h-6 text-text-muted flex-shrink-0" />
-                            {onMarkAsCompleted && (
-                              <button
-                                onClick={() => onMarkAsCompleted(workout.id)}
-                                disabled={isMarkingComplete}
-                                className="px-3 py-1.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-green-500/50 disabled:to-green-600/50 text-white text-xs font-medium rounded-lg transition-all duration-200 cursor-pointer disabled:cursor-not-allowed"
-                              >
-                                {isMarkingComplete ? 'Marcando...' : 'Marcar como Feito'}
-                              </button>
-                            )}
+                            <div className="flex flex-col gap-2">
+                              {onMarkAsCompleted && (
+                                <button
+                                  onClick={() => onMarkAsCompleted(workout.id)}
+                                  disabled={isMarkingComplete}
+                                  className="px-3 py-1.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-green-500/50 disabled:to-green-600/50 text-white text-xs font-medium rounded-lg transition-all duration-200 cursor-pointer disabled:cursor-not-allowed"
+                                >
+                                  {isMarkingComplete ? 'Marcando...' : 'Marcar como Feito'}
+                                </button>
+                              )}
+                              {onDeleteWorkout && (
+                                <button
+                                  onClick={() => onDeleteWorkout(workout.id)}
+                                  className="px-3 py-1.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-xs font-medium rounded-lg transition-all duration-200 cursor-pointer flex items-center gap-1.5 w-fit"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                  Excluir
+                                </button>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </motion.div>

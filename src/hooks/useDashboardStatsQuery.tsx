@@ -11,13 +11,15 @@ export function useDashboardStats() {
     queryKey: ['dashboard-stats'],
     queryFn: () => apiService.getDashboardStats(token!),
     enabled: !!token && isAuthenticated,
-    staleTime: 1000 * 60 * 2, // 2 minutos
+    staleTime: 0, // Sempre buscar dados frescos
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   return {
     stats: statsQuery.data || {
       weeklyWorkouts: 0,
-      weeklyGoal: 5,
+      weeklyGoal: 3, // Padrão de 3 treinos por semana
       totalWorkouts: 0,
       averageWorkoutDuration: 0,
       currentStreak: 0,

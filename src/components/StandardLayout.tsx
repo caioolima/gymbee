@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
-import { InstagramSidebar } from '@/components/InstagramSidebar';
+import { InstagramSidebar } from './InstagramSidebar';
 
-export default function WorkoutsLayout({
-  children,
-}: {
+interface StandardLayoutProps {
   children: React.ReactNode;
-}) {
+  title: string;
+  subtitle?: string;
+}
+
+export function StandardLayout({ children, title, subtitle }: StandardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -34,8 +36,8 @@ export default function WorkoutsLayout({
               <Menu className="w-5 h-5 text-foreground" />
             </button>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Treinos</h1>
-              <p className="text-text-muted">Gerencie seus treinos e exercícios</p>
+              <h1 className="text-2xl font-bold text-foreground">{title}</h1>
+              {subtitle && <p className="text-text-muted">{subtitle}</p>}
             </div>
           </div>
         </header>

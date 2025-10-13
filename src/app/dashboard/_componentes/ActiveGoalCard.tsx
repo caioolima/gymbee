@@ -148,11 +148,11 @@ export function ActiveGoalCard({ user }: ActiveGoalCardProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg relative overflow-hidden"
+        className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg relative overflow-hidden h-full flex flex-col"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
         
-        <div className="relative z-10 text-center">
+        <div className="relative z-10 flex flex-col justify-center items-center text-center h-full">
           <div className="w-20 h-20 bg-gradient-to-br from-accent/20 to-yellow-300/20 border border-accent/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Target className="w-10 h-10 text-accent" />
           </div>

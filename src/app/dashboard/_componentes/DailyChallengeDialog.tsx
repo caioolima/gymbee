@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { X, Target, Trophy, CheckCircle, Loader2, Calendar, Star } from 'lucide-react';
+import { X, Target, Trophy, CheckCircle, Loader2, Calendar, Star, Bot, Sparkles, Brain, Zap } from 'lucide-react';
 
 interface DailyChallengeDialogProps {
   challenge: {
@@ -58,14 +58,28 @@ export function DailyChallengeDialog({
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-accent to-yellow-300 rounded-xl flex items-center justify-center">
-              <Target className="w-6 h-6 text-black" />
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-r from-accent to-yellow-300 rounded-xl flex items-center justify-center">
+                <Target className="w-6 h-6 text-black" />
+              </div>
+              {/* AI Badge */}
+              <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-accent to-yellow-400 rounded-full flex items-center justify-center">
+                <Bot className="w-3 h-3 text-black" />
+              </div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-foreground">Desafio Diário</h2>
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="text-2xl font-bold text-foreground">Desafio Diário</h2>
+                <div className="flex items-center gap-1 bg-gradient-to-r from-accent/20 to-yellow-400/20 border border-accent/30 rounded-full px-2 py-0.5">
+                  <Brain className="w-3 h-3 text-accent" />
+                  <span className="text-xs font-medium text-accent">IA</span>
+                  <Sparkles className="w-3 h-3 text-yellow-400 animate-pulse" />
+                </div>
+              </div>
               <p className="text-text-muted text-sm flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 {new Date(challenge.date).toLocaleDateString('pt-BR')}
+                <span className="text-accent">• Personalizado para você</span>
               </p>
             </div>
           </div>
@@ -79,6 +93,31 @@ export function DailyChallengeDialog({
 
         {/* Content */}
         <div className="space-y-6">
+          {/* AI Explanation */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="bg-gradient-to-r from-accent/10 to-yellow-400/10 border border-accent/20 rounded-xl p-4"
+          >
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-yellow-400 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Brain className="w-4 h-4 text-black" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+                  Criado por IA
+                  <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+                </h4>
+                <p className="text-sm text-text-muted leading-relaxed">
+                  Este desafio foi personalizado especialmente para você baseado no seu objetivo atual, 
+                  nível de experiência e histórico de treinos. Nossa IA analisou seu perfil para 
+                  criar o desafio mais eficaz!
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Challenge Info */}
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-2">
@@ -89,12 +128,31 @@ export function DailyChallengeDialog({
             </p>
           </div>
 
-          {/* Points Badge */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-accent to-yellow-300 rounded-lg flex items-center justify-center">
-              <Trophy className="w-4 h-4 text-black" />
+          {/* Points and Details */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-accent/10 to-yellow-300/10 border border-accent/20 rounded-xl">
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-yellow-300 rounded-lg flex items-center justify-center">
+                <Trophy className="w-4 h-4 text-black" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-foreground">{challenge.challenge.points} pontos</p>
+                <p className="text-xs text-text-muted">Recompensa</p>
+              </div>
             </div>
-            <span className="text-sm font-medium text-foreground">{challenge.challenge.points} pontos</span>
+            
+            <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-accent/10 to-yellow-400/10 border border-accent/20 rounded-xl">
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-yellow-400 rounded-lg flex items-center justify-center">
+                <Zap className="w-4 h-4 text-black" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-foreground">
+                  {challenge.challenge.goalType === 'GAIN_MASS' ? 'Ganhar Massa' : 
+                   challenge.challenge.goalType === 'LOSE_WEIGHT' ? 'Perder Peso' : 
+                   'Condicionamento'}
+                </p>
+                <p className="text-xs text-text-muted">Seu objetivo</p>
+              </div>
+            </div>
           </div>
 
           {/* Status */}

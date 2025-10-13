@@ -239,6 +239,17 @@ export function WorkoutCalendar() {
             <p className="text-text-muted mt-1 text-sm">
               {formatWeekRange(weekStart, weekEnd)}
             </p>
+            
+            {/* Planejar Semana Button */}
+            <div className="mt-4">
+              <button
+                onClick={() => setShowWeeklyPlanning(true)}
+                className="group px-6 py-3 bg-gradient-to-r from-accent to-yellow-300 hover:from-accent/90 hover:to-yellow-300/90 text-black font-bold rounded-xl transition-all duration-300 cursor-pointer transform hover:scale-[1.05] hover:shadow-lg hover:shadow-accent/25 flex items-center gap-2 shadow-md"
+              >
+                <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                Planejar Semana
+              </button>
+            </div>
           </div>
           
           <div className="flex items-center gap-3">
@@ -296,25 +307,6 @@ export function WorkoutCalendar() {
         })}
       </div>
 
-      {/* Quick Actions */}
-      <div className="bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/5 backdrop-blur-sm rounded-3xl p-8 border border-border/30 shadow-xl">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-gradient-to-r from-accent to-yellow-300 rounded-2xl flex items-center justify-center">
-            <Zap className="w-5 h-5 text-black" />
-          </div>
-          <h3 className="text-2xl font-bold text-foreground">Ações Rápidas</h3>
-        </div>
-        <div className="flex flex-wrap gap-4">
-          <button
-            onClick={() => setShowWeeklyPlanning(true)}
-            className="group px-8 py-4 bg-gradient-to-r from-accent to-yellow-300 hover:from-accent/90 hover:to-yellow-300/90 text-black font-bold rounded-2xl transition-all duration-300 cursor-pointer transform hover:scale-[1.05] hover:shadow-2xl hover:shadow-accent/25 flex items-center gap-3 shadow-lg"
-          >
-            <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-            Planejar Semana
-          </button>
-        </div>
-      </div>
-
       {/* Modals */}
       {showScheduleModal && (
         <ScheduleWorkoutModal
@@ -353,6 +345,7 @@ export function WorkoutCalendar() {
           getWorkoutTypeIcon={getWorkoutTypeIcon}
           getWorkoutTypeColor={getWorkoutTypeColor}
           onMarkAsCompleted={markWorkoutAsCompleted}
+          onDeleteWorkout={deleteWorkout}
           isMarkingComplete={isMarkingComplete}
         />
       )}

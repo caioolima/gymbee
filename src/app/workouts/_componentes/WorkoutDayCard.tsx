@@ -74,7 +74,7 @@ export function WorkoutDayCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.1 }}
-      className={`group bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/5 backdrop-blur-sm rounded-2xl border border-border/30 shadow-lg hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 relative flex flex-col h-full ${
+      className={`group bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/5 backdrop-blur-sm rounded-2xl border border-border/30 shadow-lg hover:shadow-xl hover:shadow-accent/10 transition-all duration-300 relative flex flex-col h-full min-h-[280px] ${
         isToday ? 'ring-2 ring-accent shadow-accent/20' : ''
       } ${isPast ? 'opacity-70' : ''}`}
     >
@@ -103,7 +103,7 @@ export function WorkoutDayCard({
       </div>
 
       {/* Content Area */}
-      <div className="p-4 flex-1 flex flex-col">
+      <div className="p-4 flex-1 flex flex-col min-h-[140px]">
         {/* Workouts List */}
         {completedWorkouts.length > 0 ? (
           <div className="space-y-3">
@@ -184,13 +184,20 @@ export function WorkoutDayCard({
             })}
           </div>
         ) : (
-          <div className="text-center py-6">
-            <div className="w-12 h-12 bg-gradient-to-r from-input-bg to-input-bg/60 rounded-xl flex items-center justify-center mx-auto mb-3">
-              <Dumbbell className="w-6 h-6 text-text-muted" />
+          <div className="flex flex-col justify-center items-center text-center h-full min-h-[120px]">
+            <div className="w-16 h-16 bg-gradient-to-br from-accent/10 to-yellow-400/10 border border-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Dumbbell className="w-8 h-8 text-accent/60" />
             </div>
-            <p className="text-sm text-text-muted font-medium">
-              {isPast ? 'Nenhum treino' : 'Sem treinos'}
-            </p>
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-text-muted">
+                {isPast ? 'Nenhum treino' : 'Sem treinos'}
+              </p>
+              {!isPast && (
+                <p className="text-xs text-text-muted/70">
+                  Clique em + para adicionar
+                </p>
+              )}
+            </div>
           </div>
         )}
 
@@ -233,7 +240,8 @@ export function WorkoutDayCard({
       </div>
 
       {/* Action Buttons */}
-      <div className="p-4 border-t border-border/20 space-y-2">
+      {(totalWorkouts > 0 || totalPlanned > 0 || !isPast) && (
+        <div className="p-4 border-t border-border/20 space-y-2">
         {/* Delete Workouts Button */}
         {(totalWorkouts > 0 || totalPlanned > 0) && (
           <button
@@ -275,7 +283,8 @@ export function WorkoutDayCard({
             {totalWorkouts > 0 ? 'Adicionar' : 'Treinar'}
           </button>
         )}
-      </div>
+        </div>
+      )}
     </motion.div>
   );
 }

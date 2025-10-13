@@ -29,7 +29,7 @@ export function useGoals() {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       queryClient.invalidateQueries({ queryKey: ['active-goal'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Objetivo criado com sucesso! 🎯');
+      toast.success('Objetivo criado com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to create goal:', error);
@@ -46,7 +46,7 @@ export function useGoals() {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       queryClient.invalidateQueries({ queryKey: ['active-goal'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Objetivo atualizado com sucesso! ✏️');
+      toast.success('Objetivo atualizado com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to update goal:', error);
@@ -63,7 +63,7 @@ export function useGoals() {
       queryClient.invalidateQueries({ queryKey: ['goals'] });
       queryClient.invalidateQueries({ queryKey: ['active-goal'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Objetivo excluído com sucesso! 🗑️');
+      toast.success('Objetivo excluído com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to delete goal:', error);

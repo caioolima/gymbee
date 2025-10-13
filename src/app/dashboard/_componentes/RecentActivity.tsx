@@ -1,15 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Activity, Trophy, Target, Clock, Dumbbell, Scale, Award, Zap } from 'lucide-react';
+import { Activity, Trophy, Target, Clock, Dumbbell, Scale, Award, Zap, ArrowRight } from 'lucide-react';
 import { useActivities } from '@/hooks/useActivitiesQuery';
+import { useRouter } from 'next/navigation';
 
 interface RecentActivityProps {
   user: any;
 }
 
 export function RecentActivity({ user }: RecentActivityProps) {
-  const { activities, isLoading } = useActivities(5);
+  const router = useRouter();
+  const { activities, isLoading } = useActivities(3);
 
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -122,7 +124,7 @@ export function RecentActivity({ user }: RecentActivityProps) {
         </div>
         
         {activities.length === 0 ? (
-          <div className="text-center py-8">
+          <div className="flex flex-col justify-center items-center text-center h-full py-8">
             <div className="w-16 h-16 bg-gradient-to-br from-slate-700/30 to-slate-600/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Activity className="w-8 h-8 text-slate-400" />
             </div>
@@ -130,42 +132,58 @@ export function RecentActivity({ user }: RecentActivityProps) {
             <p className="text-base text-slate-400">Suas atividades aparecerão aqui</p>
           </div>
         ) : (
-          <div className="space-y-3">
-            {activities.map((activity, index) => {
-              const Icon = getActivityIcon(activity.type);
-              const colorClass = getActivityColor(activity.type);
-              const bgColorClass = getActivityBgColor(activity.type);
-              
-              return (
-                <motion.div
-                  key={activity.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-start gap-3 p-3 hover:bg-white/5 rounded-xl transition-colors"
-                >
-                  <div className={`w-8 h-8 ${bgColorClass} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                    <Icon className={`w-4 h-4 ${colorClass}`} />
-                  </div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <p className="text-lg font-bold text-foreground mb-1">
-                      {activity.title}
-                    </p>
-                    <p className="text-base text-text-muted mb-2 leading-relaxed">
-                      {activity.description}
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-accent" />
-                      <span className="text-sm font-medium text-accent">
-                        {formatTimeAgo(activity.date)}
-                      </span>
+          <>
+            <div className="space-y-3">
+              {activities.map((activity, index) => {
+                const Icon = getActivityIcon(activity.type);
+                const colorClass = getActivityColor(activity.type);
+                const bgColorClass = getActivityBgColor(activity.type);
+                
+                return (
+                  <motion.div
+                    key={activity.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="flex items-start gap-3 p-3 hover:bg-white/5 rounded-xl transition-colors"
+                  >
+                    <div className={`w-8 h-8 ${bgColorClass} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <Icon className={`w-4 h-4 ${colorClass}`} />
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <p className="text-lg font-bold text-foreground mb-1">
+                        {activity.title}
+                      </p>
+                      <p className="text-base text-text-muted mb-2 leading-relaxed">
+                        {activity.description}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-accent" />
+                        <span className="text-sm font-medium text-accent">
+                          {formatTimeAgo(activity.date)}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+            
+            {/* Ver Mais Button */}
+            <div className="mt-6 pt-4 border-t border-border/30">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => router.push('/activities')}
+                className="w-full bg-gradient-to-r from-accent to-yellow-400 hover:from-accent/90 hover:to-yellow-400/90 text-black font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:shadow-lg hover:shadow-accent/25 flex items-center justify-center gap-2"
+              >
+                <Activity className="w-4 h-4" />
+                <span className="text-sm">Ver Todas as Atividades</span>
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+          </>
         )}
       </div>
     </div>

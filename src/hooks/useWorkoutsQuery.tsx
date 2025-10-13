@@ -46,7 +46,7 @@ export function useWorkouts() {
       queryClient.invalidateQueries({ queryKey: ['weekly-workouts'] });
       queryClient.invalidateQueries({ queryKey: ['weekly-workout-count'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Treino registrado com sucesso! 🏋️‍♂️');
+      toast.success('Treino registrado com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to create workout:', error);
@@ -70,7 +70,7 @@ export function useWorkouts() {
       queryClient.invalidateQueries({ queryKey: ['weekly-workouts'] });
       queryClient.invalidateQueries({ queryKey: ['weekly-workout-count'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Treino marcado como realizado! ✅');
+      toast.success('Treino marcado como realizado!');
     },
     onError: (error: any) => {
       console.error('Failed to mark workout as completed:', error);
@@ -94,7 +94,7 @@ export function useWorkouts() {
       queryClient.invalidateQueries({ queryKey: ['weekly-workouts'] });
       queryClient.invalidateQueries({ queryKey: ['weekly-workout-count'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Treino atualizado com sucesso! ✏️');
+      toast.success('Treino atualizado com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to update workout:', error);
@@ -113,7 +113,7 @@ export function useWorkouts() {
       queryClient.invalidateQueries({ queryKey: ['weekly-workouts'] });
       queryClient.invalidateQueries({ queryKey: ['weekly-workout-count'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
-      toast.success('Treino excluído com sucesso! 🗑️');
+      toast.success('Treino excluído com sucesso!');
     },
     onError: (error: any) => {
       console.error('Failed to delete workout:', error);

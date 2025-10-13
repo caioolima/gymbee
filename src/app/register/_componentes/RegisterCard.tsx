@@ -70,7 +70,7 @@ export function RegisterCard() {
         await registerUser(completeData);
         
         // Toast de sucesso
-        toast.success('Conta criada com sucesso! 🎉', {
+        toast.success('Conta criada com sucesso!', {
           duration: 3000,
         });
         
@@ -83,7 +83,7 @@ export function RegisterCard() {
         await registerTrainer(completeData);
         
         // Toast de sucesso
-        toast.success('Conta de trainer criada com sucesso! 🏋️‍♂️', {
+        toast.success('Conta de trainer criada com sucesso!', {
           duration: 3000,
         });
         
@@ -132,7 +132,7 @@ export function RegisterCard() {
       await apiService.createGoal(goalData, token);
       
       // Toast de sucesso
-      toast.success('Perfil fitness criado com sucesso! 🏋️‍♂️', {
+      toast.success('Perfil fitness criado com sucesso!', {
         duration: 3000,
       });
       
@@ -265,7 +265,7 @@ export function RegisterCard() {
                 width={240}
                 height={50}
                 priority
-                className="h-auto mx-auto drop-shadow-lg"
+                className="h-16 w-auto mx-auto drop-shadow-lg"
               />
             </motion.div>
 
@@ -275,13 +275,7 @@ export function RegisterCard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div className="mb-6">
-                <img 
-                  src="/images/logo-gymbee.svg" 
-                  alt="GymBee" 
-                  className="h-16 w-auto mx-auto"
-                />
-              </div>
+            
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
                 Bem-vindo à GymBee
               </h1>

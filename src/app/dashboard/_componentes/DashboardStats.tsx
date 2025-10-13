@@ -8,6 +8,7 @@ import { useDailyChallenges } from '@/hooks/useDailyChallengesQuery';
 import { useState, useEffect } from 'react';
 import { AchievementsList } from './AchievementsList';
 import { DailyChallengeDialog } from './DailyChallengeDialog';
+import { DailyChallengeCard } from './DailyChallengeCard';
 
 interface DashboardStatsProps {
   user: any;
@@ -166,6 +167,7 @@ export function DashboardStats({ user }: DashboardStatsProps) {
       badgeIcon: Eye,
       onClick: todaysChallenge ? handleViewChallenge : undefined,
       trend: todaysChallenge ? 'up' : 'neutral',
+      isSpecial: true, // Marcar como especial para estilo diferenciado
     },
     {
       title: 'Progresso Semanal',
@@ -180,7 +182,8 @@ export function DashboardStats({ user }: DashboardStatsProps) {
       description: `${stats.totalWorkouts} treinos realizados no total`,
       details: [
         `Meta semanal: ${stats.weeklyGoal} treinos`,
-        `Restam: ${Math.max(0, stats.weeklyGoal - stats.weeklyWorkouts)} treinos`
+        `Restam: ${Math.max(0, stats.weeklyGoal - stats.weeklyWorkouts)} treinos`,
+        `Meta baseada nos treinos agendados esta semana`
       ],
       trend: stats.weeklyWorkouts > 0 ? 'up' : 'neutral',
       progress: (stats.weeklyWorkouts / stats.weeklyGoal) * 100,
@@ -229,8 +232,16 @@ export function DashboardStats({ user }: DashboardStatsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {statsData.map((stat, index) => {
+    <div className="space-y-6">
+      {/* Daily Challenge Card - Special Layout */}
+      <DailyChallengeCard 
+        user={user} 
+        onViewChallenge={handleViewChallenge}
+      />
+
+      {/* Stats Grid */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {statsData.filter(stat => stat.title !== 'Desafio Diário').map((stat, index) => {
         const Icon = stat.icon;
         return (
           <motion.div
@@ -430,6 +441,7 @@ export function DashboardStats({ user }: DashboardStatsProps) {
           </motion.div>
         );
       })}
+      </div>
       
       {/* Modal de Conquistas */}
       {showAchievements && (

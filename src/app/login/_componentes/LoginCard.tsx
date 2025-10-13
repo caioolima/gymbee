@@ -53,7 +53,7 @@ export function LoginCard() {
     
     try {
       await login(email, password);
-      toast.success('Login realizado com sucesso! 🎉');
+      toast.success('Login realizado com sucesso!');
       router.push('/dashboard');
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Erro ao fazer login';

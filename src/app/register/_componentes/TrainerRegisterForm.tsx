@@ -35,8 +35,9 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
     // Format CREF
     if (name === 'cref') {
       const formattedValue = value
-        .replace(/\D/g, '') // Remove all non-digits
-        .replace(/(\d{6})(\d)/, '$1-$2'); // Add dash after 6 digits
+        .replace(/[^0-9A-Za-z]/g, '') // Remove all non-alphanumeric characters
+        .replace(/(\d{6})([A-Za-z])([A-Za-z]{2})/, '$1-$2/$3') // Format: 000000-G/UF
+        .toUpperCase(); // Convert to uppercase
       
       setFormData(prev => ({
         ...prev,
@@ -101,8 +102,8 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
 
     if (!formData.cref.trim()) {
       newErrors.cref = 'CREF é obrigatório';
-    } else if (!/^\d{6}-[A-Z]{2}$/.test(formData.cref)) {
-      newErrors.cref = 'CREF deve estar no formato 000000-AA';
+    } else if (!/^\d{6}-[A-Z]\/[A-Z]{2}$/.test(formData.cref)) {
+      newErrors.cref = 'CREF deve estar no formato 000000-G/UF (6 números, letra, barra, sigla do estado)';
     }
 
     if (!formData.cpf.trim()) {
@@ -276,8 +277,8 @@ export function TrainerRegisterForm({ onSuccess }: TrainerRegisterFormProps) {
             name="cref"
             value={formData.cref}
             onChange={handleInputChange}
-            placeholder="000000-AA"
-            maxLength={9}
+            placeholder="000000-G/UF"
+            maxLength={11}
             className={`w-full px-4 py-3 bg-input-bg border rounded-lg text-foreground placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${
               errors.cref ? 'border-red-500' : 'border-input-border'
             }`}

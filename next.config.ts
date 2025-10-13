@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import withPWA from "next-pwa";
+// import withPWA from "next-pwa";
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -10,9 +10,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPWA({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === "development",
-})(nextConfig);
+// Temporariamente desabilitado PWA para debug
+export default nextConfig;
+
+// export default withPWA({
+//   dest: "public",
+//   register: true,
+//   skipWaiting: true,
+//   disable: process.env.NODE_ENV === "development",
+// })(nextConfig);

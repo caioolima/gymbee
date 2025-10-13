@@ -366,9 +366,9 @@ class ApiService {
     });
   }
 
-  // Workout ranking API
-  async getWorkoutRanking(token: string): Promise<any> {
-    return this.request('/home/ranking', {
+  // User ranking API
+  async getUserRanking(token: string): Promise<any> {
+    return this.request('/home/user-ranking', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -376,9 +376,75 @@ class ApiService {
     });
   }
 
+  async getUserLevel(token: string): Promise<any> {
+    return this.request('/home/user-level', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // User profile API
+  async getCurrentUser(token: string): Promise<any> {
+    return this.request('/auth/me', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getUserGoals(token: string): Promise<any> {
+    return this.request('/users/goals', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getUserAchievements(token: string): Promise<any> {
+    return this.request('/users/achievements', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getDashboardStats(token: string): Promise<any> {
+    return this.request('/users/dashboard/stats', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getUserWorkouts(token: string, limit: number = 10): Promise<any> {
+    return this.request(`/users/workouts?limit=${limit}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async updateUserProfile(token: string, updateData: any): Promise<any> {
+    return this.request('/auth/me', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+    });
+  }
+
   // Trending articles API
   async getTrendingArticles(token: string, limit?: number): Promise<any> {
-    const endpoint = limit ? `/home/articles?limit=${limit}` : '/home/articles';
+    const endpoint = limit ? `/home/trends?limit=${limit}` : '/home/trends';
     return this.request(endpoint, {
       method: 'GET',
       headers: {
@@ -497,6 +563,288 @@ class ApiService {
   async toggleGoalActive(goalId: string, token: string): Promise<any> {
     return this.request(`/users/goals/${goalId}/toggle-active`, {
       method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Trainers API
+  async getTrainers(token: string): Promise<any[]> {
+    return this.request('/trainers', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getTrainerById(trainerId: string, token: string): Promise<any> {
+    return this.request(`/trainers/${trainerId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async swipeTrainer(trainerId: string, action: 'LIKE' | 'SKIP', token: string): Promise<any> {
+    return this.request('/trainers/swipe', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ trainerId, action }),
+    });
+  }
+
+  async getTrainerServices(trainerId: string, token: string): Promise<any[]> {
+    return this.request(`/trainers/${trainerId}/services`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getTrainerSchedule(trainerId: string, token: string): Promise<any[]> {
+    return this.request(`/trainers/${trainerId}/schedule`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async createTrainerContract(trainerId: string, contractData: any, token: string): Promise<any> {
+    return this.request(`/trainers/${trainerId}/contract`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(contractData),
+    });
+  }
+
+  async getMyTrainerContracts(token: string): Promise<any[]> {
+    return this.request('/trainers/contracts/my', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Gyms API
+  async getGyms(token: string, lat?: number, lon?: number): Promise<any[]> {
+    const params = new URLSearchParams();
+    if (lat !== undefined) params.append('lat', lat.toString());
+    if (lon !== undefined) params.append('lon', lon.toString());
+    
+    const queryString = params.toString();
+    const endpoint = queryString ? `/home/gyms?${queryString}` : '/home/gyms';
+    
+    return this.request(endpoint, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async checkInGym(checkInData: any, token: string): Promise<any> {
+    return this.request('/home/gyms/checkin', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(checkInData),
+    });
+  }
+
+  async getGymCheckIns(token: string): Promise<any[]> {
+    return this.request('/home/check-ins', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Articles API
+  async viewArticle(articleId: string, token: string): Promise<any> {
+    return this.request(`/home/articles/${articleId}/view`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Workout Ranking API
+  async voteWorkout(workoutId: string, token: string): Promise<any> {
+    return this.request(`/home/ranking/${workoutId}/vote`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // User Matching API - Sistema de matching entre usuários
+  async getUsersForMatching(token: string, filters?: any): Promise<any[]> {
+    const params = new URLSearchParams();
+    
+    if (filters?.gender) params.append('gender', filters.gender);
+    if (filters?.minAge) params.append('minAge', filters.minAge.toString());
+    if (filters?.maxAge) params.append('maxAge', filters.maxAge.toString());
+    if (filters?.goalType) params.append('goalType', filters.goalType);
+    if (filters?.experienceLevel) params.append('experienceLevel', filters.experienceLevel);
+    
+    const queryString = params.toString();
+    const endpoint = queryString ? `/users/matching?${queryString}` : '/users/matching';
+    
+    return this.request(endpoint, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async swipeUser(swipeData: any, token: string): Promise<any> {
+    return this.request('/users/swipe', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(swipeData),
+    });
+  }
+
+  async getUserMatches(token: string): Promise<any[]> {
+    return this.request('/users/matches', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getUserProfile(userId: string, token: string): Promise<any> {
+    return this.request(`/users/profile/${userId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getUserProfileByUsername(username: string, token: string): Promise<any> {
+    return this.request(`/users/profile/username/${username}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Workout Invites API
+  async createWorkoutInvite(inviteData: any, token: string): Promise<any> {
+    return this.request('/workout-invites', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inviteData),
+    });
+  }
+
+  async getSentWorkoutInvites(token: string): Promise<any[]> {
+    return this.request('/workout-invites/sent', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async getReceivedWorkoutInvites(token: string): Promise<any[]> {
+    return this.request('/workout-invites/received', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async respondToWorkoutInvite(inviteId: string, response: { status: 'ACCEPTED' | 'DECLINED' }, token: string): Promise<any> {
+    return this.request(`/workout-invites/${inviteId}/respond`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(response),
+    });
+  }
+
+  async editWorkoutInvite(inviteId: string, updateData: any, token: string): Promise<any> {
+    return this.request(`/workout-invites/${inviteId}/edit`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+    });
+  }
+
+  async cancelWorkoutInvite(inviteId: string, token: string): Promise<any> {
+    return this.request(`/workout-invites/${inviteId}/cancel`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async markWorkoutInviteAsCompleted(inviteId: string, token: string): Promise<any> {
+    return this.request(`/workout-invites/${inviteId}/complete`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  // Personal Trainers API
+  async getTrainers(token: string): Promise<any[]> {
+    return this.request('/trainers', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  async swipeTrainer(trainerId: string, action: string, token: string): Promise<any> {
+    return this.request('/trainers/swipe', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        trainerId,
+        action,
+      }),
+    });
+  }
+
+  async getMyTrainerContracts(token: string): Promise<any[]> {
+    return this.request('/trainers/contracts', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
