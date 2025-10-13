@@ -115,7 +115,9 @@ export default function ProfilePage() {
   
   // Se não está autenticado, redirecionar imediatamente
   if (isAuthenticated === false) {
-    window.location.href = '/login';
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
     return null;
   }
 
