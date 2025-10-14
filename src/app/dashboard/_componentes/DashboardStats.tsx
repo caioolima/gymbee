@@ -67,38 +67,80 @@ export function DashboardStats({ user }: DashboardStatsProps) {
     return translations[goalType] || goalType;
   };
 
+  const handleViewChallenge = () => {
+    setShowDailyChallenge(true);
+  };
+
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[1, 2, 3, 4].map((index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative overflow-hidden bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 shadow-2xl"
-          >
-            {/* Animated background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-yellow-400/5 to-amber-500/5 animate-pulse" />
-            
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <div className="space-y-2">
-                  <div className="h-4 w-24 bg-slate-700/50 rounded-lg animate-pulse" />
-                  <div className="h-12 w-16 bg-slate-600/50 rounded-xl animate-pulse" />
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-xl flex items-center justify-center">
-                  <Loader2 className="w-6 h-6 text-slate-400 animate-spin" />
-                </div>
-              </div>
+      <div className="space-y-6">
+        {/* Daily Challenge Card - Special Layout */}
+        <DailyChallengeCard 
+          user={user} 
+          onViewChallenge={handleViewChallenge}
+        />
+
+        {/* Stats Grid Loading */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            // Card 1: Progresso Semanal (azul/cinza)
+            {
+              bgGradient: 'from-slate-600/10 via-slate-500/5 to-slate-400/10',
+              shadowColor: 'shadow-slate-500/20',
+              glowColor: 'shadow-slate-500/30'
+            },
+            // Card 2: Sequência Atual (laranja/amarelo)
+            {
+              bgGradient: 'from-orange-500/10 via-amber-500/5 to-accent/10',
+              shadowColor: 'shadow-orange-500/20',
+              glowColor: 'shadow-orange-500/30'
+            },
+            // Card 3: Conquistas (amarelo/dourado)
+            {
+              bgGradient: 'from-amber-600/10 via-accent/5 to-yellow-300/10',
+              shadowColor: 'shadow-amber-500/20',
+              glowColor: 'shadow-amber-500/30'
+            }
+          ].map((cardStyle, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className={`group relative overflow-hidden bg-gradient-to-br ${cardStyle.bgGradient} backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 shadow-2xl hover:${cardStyle.shadowColor} transition-all duration-500`}
+            >
+              {/* Animated background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-600/5 via-slate-500/5 to-slate-400/5 animate-pulse" />
               
-              <div className="space-y-2">
-                <div className="h-3 w-32 bg-slate-700/30 rounded animate-pulse" />
-                <div className="h-3 w-24 bg-slate-700/30 rounded animate-pulse" />
+              {/* Glow effect skeleton */}
+              <div className={`absolute inset-0 rounded-2xl ${cardStyle.glowColor} opacity-20 blur-xl animate-pulse`} />
+              
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="h-3 w-32 bg-slate-700/50 rounded animate-pulse" />
+                    </div>
+                    <div className="h-12 w-20 bg-slate-700/50 rounded-xl animate-pulse mb-2" />
+                    <div className="flex items-center gap-2">
+                      <div className="h-4 w-4 bg-slate-600/50 rounded-full animate-pulse" />
+                      <div className="h-3 w-40 bg-slate-600/50 rounded animate-pulse" />
+                    </div>
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-xl flex items-center justify-center">
+                    <div className="w-6 h-6 bg-slate-500/50 rounded animate-pulse" />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="h-3 w-full bg-slate-700/30 rounded animate-pulse" />
+                  <div className="h-3 w-3/4 bg-slate-600/30 rounded animate-pulse" />
+                  <div className="h-3 w-1/2 bg-slate-500/30 rounded animate-pulse" />
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -139,10 +181,6 @@ export function DashboardStats({ user }: DashboardStatsProps) {
       </motion.div>
     );
   }
-
-  const handleViewChallenge = () => {
-    setShowDailyChallenge(true);
-  };
 
   const statsData = [
     {

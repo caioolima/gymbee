@@ -72,22 +72,75 @@ export function ActiveGoalCard({ user }: ActiveGoalCardProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg relative overflow-hidden"
+        className="group bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/10 backdrop-blur-sm rounded-3xl p-6 border border-border/30 shadow-xl hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
-        
-        <div className="relative z-10 text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-yellow-300/20 border border-accent/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Loader2 className="w-8 h-8 text-accent animate-spin" />
+        <div className="relative z-10">
+          {/* Header Skeleton */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex-1">
+              <div className="h-4 w-24 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-10 w-48 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-4 w-32 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-700/30 via-slate-600/20 to-slate-700/30 rounded-2xl flex items-center justify-center animate-pulse">
+              <div className="w-8 h-8 bg-slate-500/50 rounded"></div>
+            </div>
           </div>
-          
-          <h3 className="text-xl font-bold text-foreground mb-2">
-            Carregando objetivo...
-          </h3>
-          
-          <p className="text-base text-text-muted">
-            Buscando seus dados de fitness
-          </p>
+
+          {/* Progress Bar Skeleton */}
+          <div className="mb-6">
+            <div className="w-full bg-slate-700/30 rounded-full h-3 animate-pulse"></div>
+          </div>
+
+          {/* Stats Grid Skeleton */}
+          <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="bg-slate-800/30 rounded-lg p-5 animate-pulse">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 bg-slate-600/50 rounded"></div>
+                  <div className="h-4 w-20 bg-slate-600/50 rounded"></div>
+                </div>
+                <div className="h-6 w-24 bg-slate-600/50 rounded"></div>
+              </div>
+              <div className="h-10 w-16 bg-slate-600/50 rounded mb-1"></div>
+              <div className="h-4 w-20 bg-slate-600/50 rounded"></div>
+            </div>
+            
+            <div className="bg-slate-800/30 rounded-lg p-5 animate-pulse">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-5 h-5 bg-slate-600/50 rounded"></div>
+                <div className="h-4 w-12 bg-slate-600/50 rounded"></div>
+              </div>
+              <div className="h-10 w-16 bg-slate-600/50 rounded mb-1"></div>
+              <div className="h-4 w-20 bg-slate-600/50 rounded"></div>
+            </div>
+          </div>
+
+          {/* Bottom Info Skeleton */}
+          <div className="bg-slate-800/20 rounded-lg p-5 mb-6 animate-pulse">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-6 h-6 bg-slate-600/50 rounded"></div>
+                <div>
+                  <div className="h-3 w-12 bg-slate-600/50 rounded mb-1"></div>
+                  <div className="h-5 w-24 bg-slate-600/50 rounded"></div>
+                </div>
+              </div>
+              
+              <div className="text-right">
+                <div className="h-3 w-16 bg-slate-600/50 rounded mb-1"></div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-slate-600/50 rounded"></div>
+                  <div className="h-8 w-12 bg-slate-600/50 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Button Skeleton */}
+          <div className="flex justify-center">
+            <div className="h-10 w-32 bg-slate-700/30 rounded-lg animate-pulse"></div>
+          </div>
         </div>
       </motion.div>
     );

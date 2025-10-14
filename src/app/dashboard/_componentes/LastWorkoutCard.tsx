@@ -97,22 +97,57 @@ export function LastWorkoutCard({ user, onShowRegisterModal, onShowHistoryModal 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg relative overflow-hidden"
+        className="group bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/10 backdrop-blur-sm rounded-3xl p-6 border border-border/30 shadow-xl hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
-        
-        <div className="relative z-10 text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-yellow-300/20 border border-accent/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Dumbbell className="w-8 h-8 text-accent animate-pulse" />
+        <div className="relative z-10">
+          {/* Header Skeleton */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex-1">
+              <div className="h-4 w-24 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-10 w-48 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-4 w-32 bg-slate-600/50 rounded animate-pulse mb-1"></div>
+              <div className="h-3 w-28 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-700/30 via-slate-600/20 to-slate-700/30 rounded-2xl flex items-center justify-center animate-pulse">
+              <div className="w-8 h-8 bg-slate-500/50 rounded"></div>
+            </div>
           </div>
-          
-          <h3 className="text-lg font-bold text-foreground mb-2">
-            Carregando treinos...
-          </h3>
-          
-          <p className="text-text-muted">
-            Buscando seus dados de treino
-          </p>
+
+          {/* Workout Details Skeleton */}
+          <div className="mb-8">
+            <div className="space-y-2 mb-4">
+              <div className="h-4 w-full bg-slate-600/30 rounded animate-pulse"></div>
+              <div className="h-4 w-3/4 bg-slate-600/30 rounded animate-pulse"></div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-800/30 rounded-lg p-4 animate-pulse">
+                <div className="h-3 w-24 bg-slate-600/50 rounded mb-2"></div>
+                <div className="h-6 w-12 bg-slate-600/50 rounded"></div>
+              </div>
+              
+              <div className="bg-slate-800/30 rounded-lg p-4 animate-pulse">
+                <div className="h-3 w-28 bg-slate-600/50 rounded mb-2"></div>
+                <div className="h-6 w-8 bg-slate-600/50 rounded"></div>
+              </div>
+              
+              <div className="bg-slate-800/30 rounded-lg p-4 animate-pulse">
+                <div className="h-3 w-24 bg-slate-600/50 rounded mb-2"></div>
+                <div className="h-6 w-8 bg-slate-600/50 rounded"></div>
+              </div>
+              
+              <div className="bg-slate-800/30 rounded-lg p-4 animate-pulse">
+                <div className="h-3 w-20 bg-slate-600/50 rounded mb-2"></div>
+                <div className="h-6 w-12 bg-slate-600/50 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Actions Skeleton */}
+          <div className="flex gap-3">
+            <div className="flex-1 h-12 bg-gradient-to-r from-slate-600/50 to-slate-500/50 rounded-xl animate-pulse"></div>
+            <div className="w-24 h-12 bg-slate-700/30 border border-slate-600/30 rounded-xl animate-pulse"></div>
+          </div>
         </div>
       </motion.div>
     );

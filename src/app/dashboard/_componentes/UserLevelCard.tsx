@@ -99,3 +99,4 @@ export function UserLevelCard() {
     </motion.div>
   );
 }
+

@@ -11,7 +11,7 @@ interface DailyChallengeCardProps {
 }
 
 export function DailyChallengeCard({ user, onViewChallenge }: DailyChallengeCardProps) {
-  const { todaysChallenge, isLoading } = useDailyChallenges();
+  const { todaysChallenge, isLoading: isLoadingTodaysChallenge } = useDailyChallenges();
 
   const translateCategory = (category: string) => {
     switch (category?.toUpperCase()) {
@@ -44,35 +44,192 @@ export function DailyChallengeCard({ user, onViewChallenge }: DailyChallengeCard
     }
   };
 
-  if (isLoading) {
+  if (isLoadingTodaysChallenge) {
     return (
-      <div className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg relative overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="group bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg hover:shadow-xl hover:shadow-accent/20 transition-all duration-500 transform hover:scale-[1.02] relative overflow-hidden"
+      >
+        {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
-        <div className="relative z-10 flex items-center justify-center h-48">
-          <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-yellow-300/20 border border-accent/30 rounded-2xl flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+        
+        {/* AI Badge Skeleton */}
+        <div className="absolute top-4 right-4 z-20">
+          <div className="flex items-center gap-1 bg-gradient-to-r from-slate-700/30 to-slate-600/30 border border-slate-600/30 rounded-full px-3 py-1 animate-pulse">
+            <div className="w-3 h-3 bg-slate-500/50 rounded-full"></div>
+            <div className="w-4 h-3 bg-slate-500/50 rounded"></div>
+            <div className="w-3 h-3 bg-slate-500/50 rounded-full"></div>
           </div>
         </div>
-      </div>
+        
+        {/* Decorative Elements Skeleton */}
+        <div className="absolute top-16 right-4 w-16 h-16 bg-gradient-to-br from-slate-700/30 to-slate-600/30 rounded-2xl flex items-center justify-center opacity-60 animate-pulse">
+          <div className="w-8 h-8 bg-slate-500/50 rounded"></div>
+        </div>
+
+        <div className="relative z-10 p-6">
+          {/* Header Skeleton */}
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-24 h-4 bg-slate-700/50 rounded animate-pulse"></div>
+            <div className="w-2 h-2 bg-slate-600/50 rounded-full animate-pulse"></div>
+          </div>
+
+          {/* Challenge Title Skeleton */}
+          <div className="h-8 w-3/4 bg-slate-700/50 rounded mb-3 animate-pulse"></div>
+
+          {/* Status Skeleton */}
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-4 h-4 bg-slate-600/50 rounded-full animate-pulse"></div>
+            <div className="w-24 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+          </div>
+
+          {/* Description Skeleton */}
+          <div className="space-y-2 mb-4">
+            <div className="h-4 w-full bg-slate-600/30 rounded animate-pulse"></div>
+            <div className="h-4 w-3/4 bg-slate-600/30 rounded animate-pulse"></div>
+          </div>
+
+          {/* AI Motivational Message Skeleton */}
+          <div className="bg-gradient-to-r from-slate-700/20 to-slate-600/20 border border-slate-600/20 rounded-lg p-3 mb-4 w-fit max-w-sm animate-pulse">
+            <div className="flex items-start gap-2">
+              <div className="w-4 h-4 bg-slate-500/50 rounded-full mt-0.5 flex-shrink-0"></div>
+              <div className="space-y-2">
+                <div className="h-4 w-48 bg-slate-500/50 rounded"></div>
+                <div className="h-3 w-40 bg-slate-400/50 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Challenge Details Skeleton */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-gradient-to-r from-slate-600/50 to-slate-500/50 rounded-lg animate-pulse"></div>
+              <div className="w-16 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-slate-500/50 rounded animate-pulse"></div>
+              <div className="w-12 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            
+            <div className="flex items-center gap-1">
+              <div className="w-8 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+          </div>
+
+          {/* Completion Info and Action Button Skeleton */}
+          <div className="flex items-center gap-3">
+            <div className="inline-flex items-center gap-2 bg-slate-700/20 border border-slate-600/20 rounded-lg px-3 py-2 animate-pulse">
+              <div className="w-4 h-4 bg-slate-500/50 rounded-full"></div>
+              <div className="w-20 h-4 bg-slate-500/50 rounded"></div>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-slate-600/50 to-slate-500/50 animate-pulse">
+              <div className="w-4 h-4 bg-slate-400/50 rounded"></div>
+              <div className="w-16 h-4 bg-slate-400/50 rounded"></div>
+              <div className="w-3 h-3 bg-slate-400/50 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     );
   }
 
-  if (!todaysChallenge) {
+
+
+  // Se não tem challenge, mostra skeleton
+  if (!todaysChallenge || !todaysChallenge.challenge) {
     return (
-      <div className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg relative overflow-hidden h-full flex flex-col">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="group bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg hover:shadow-xl hover:shadow-accent/20 transition-all duration-500 transform hover:scale-[1.02] relative overflow-hidden"
+      >
+        {/* Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
-        <div className="relative z-10 p-6 flex flex-col justify-center items-center text-center h-full">
-          <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-yellow-300/20 border border-accent/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Target className="w-8 h-8 text-accent" />
-          </div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Sem Desafio Ativo</h3>
-          <p className="text-text-muted text-sm mb-4">Complete treinos para desbloquear desafios diários</p>
-          <div className="text-xs text-text-muted">
-            <p>• Complete 3 treinos para desbloquear</p>
-            <p>• Desafios renovam diariamente</p>
+        
+        {/* AI Badge Skeleton */}
+        <div className="absolute top-4 right-4 z-20">
+          <div className="flex items-center gap-1 bg-gradient-to-r from-slate-700/30 to-slate-600/30 border border-slate-600/30 rounded-full px-3 py-1 animate-pulse">
+            <div className="w-3 h-3 bg-slate-500/50 rounded-full"></div>
+            <div className="w-4 h-3 bg-slate-500/50 rounded"></div>
+            <div className="w-3 h-3 bg-slate-500/50 rounded-full"></div>
           </div>
         </div>
-      </div>
+        
+        {/* Decorative Elements Skeleton */}
+        <div className="absolute top-16 right-4 w-16 h-16 bg-gradient-to-br from-slate-700/30 to-slate-600/30 rounded-2xl flex items-center justify-center opacity-60 animate-pulse">
+          <div className="w-8 h-8 bg-slate-500/50 rounded"></div>
+        </div>
+
+        <div className="relative z-10 p-6">
+          {/* Header Skeleton */}
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-24 h-4 bg-slate-700/50 rounded animate-pulse"></div>
+            <div className="w-2 h-2 bg-slate-600/50 rounded-full animate-pulse"></div>
+          </div>
+
+          {/* Challenge Title Skeleton */}
+          <div className="h-8 w-3/4 bg-slate-700/50 rounded mb-3 animate-pulse"></div>
+
+          {/* Status Skeleton */}
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-4 h-4 bg-slate-600/50 rounded-full animate-pulse"></div>
+            <div className="w-24 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+          </div>
+
+          {/* Description Skeleton */}
+          <div className="space-y-2 mb-4">
+            <div className="h-4 w-full bg-slate-600/30 rounded animate-pulse"></div>
+            <div className="h-4 w-3/4 bg-slate-600/30 rounded animate-pulse"></div>
+          </div>
+
+          {/* AI Motivational Message Skeleton */}
+          <div className="bg-gradient-to-r from-slate-700/20 to-slate-600/20 border border-slate-600/20 rounded-lg p-3 mb-4 w-fit max-w-sm animate-pulse">
+            <div className="flex items-start gap-2">
+              <div className="w-4 h-4 bg-slate-500/50 rounded-full mt-0.5 flex-shrink-0"></div>
+              <div className="space-y-2">
+                <div className="h-4 w-48 bg-slate-500/50 rounded"></div>
+                <div className="h-3 w-40 bg-slate-400/50 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Challenge Details Skeleton */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-gradient-to-r from-slate-600/50 to-slate-500/50 rounded-lg animate-pulse"></div>
+              <div className="w-16 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-slate-500/50 rounded animate-pulse"></div>
+              <div className="w-12 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            
+            <div className="flex items-center gap-1">
+              <div className="w-8 h-4 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+          </div>
+
+          {/* Completion Info and Action Button Skeleton */}
+          <div className="flex items-center gap-3">
+            <div className="inline-flex items-center gap-2 bg-slate-700/20 border border-slate-600/20 rounded-lg px-3 py-2 animate-pulse">
+              <div className="w-4 h-4 bg-slate-500/50 rounded-full"></div>
+              <div className="w-20 h-4 bg-slate-500/50 rounded"></div>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-slate-600/50 to-slate-500/50 animate-pulse">
+              <div className="w-4 h-4 bg-slate-400/50 rounded"></div>
+              <div className="w-16 h-4 bg-slate-400/50 rounded"></div>
+              <div className="w-3 h-3 bg-slate-400/50 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     );
   }
 

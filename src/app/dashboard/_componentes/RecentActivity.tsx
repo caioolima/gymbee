@@ -75,27 +75,32 @@ export function RecentActivity({ user }: RecentActivityProps) {
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-card-bg to-card-bg/90 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-yellow-300/5"></div>
-        
+      <div className="group bg-gradient-to-br from-card-bg via-card-bg/95 to-accent/10 backdrop-blur-sm rounded-3xl p-6 border border-border/30 shadow-xl hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2">
         <div className="relative z-10">
+          {/* Header Skeleton */}
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-accent/20 to-yellow-300/20 rounded-xl flex items-center justify-center">
-                <Activity className="w-6 h-6 text-accent" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground">Atividades Recentes</h3>
-                <p className="text-base text-text-muted">Carregando...</p>
-              </div>
+            <div className="flex-1">
+              <div className="h-4 w-32 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-10 w-8 bg-slate-700/50 rounded animate-pulse mb-1"></div>
+              <div className="h-4 w-36 bg-slate-600/50 rounded animate-pulse"></div>
+            </div>
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-700/30 via-slate-600/20 to-slate-700/30 rounded-2xl flex items-center justify-center animate-pulse">
+              <div className="w-8 h-8 bg-slate-500/50 rounded"></div>
             </div>
           </div>
           
+          {/* Activities Skeleton */}
           <div className="space-y-3">
             {[1, 2, 3].map((index) => (
-              <div key={index} className="animate-pulse">
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+              <div key={index} className="flex items-start gap-3 p-3 bg-slate-800/30 rounded-xl animate-pulse">
+                <div className="w-8 h-8 bg-slate-600/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-4 h-4 bg-slate-500/50 rounded"></div>
+                </div>
+                <div className="flex-1">
+                  <div className="h-4 w-3/4 bg-slate-600/50 rounded mb-1"></div>
+                  <div className="h-3 w-1/2 bg-slate-500/50 rounded"></div>
+                </div>
+                <div className="h-3 w-12 bg-slate-600/50 rounded"></div>
               </div>
             ))}
           </div>
@@ -123,7 +128,7 @@ export function RecentActivity({ user }: RecentActivityProps) {
           </div>
         </div>
         
-        {activities.length === 0 ? (
+        {!activities || activities.length === 0 ? (
           <div className="flex flex-col justify-center items-center text-center h-full py-8">
             <div className="w-16 h-16 bg-gradient-to-br from-slate-700/30 to-slate-600/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Activity className="w-8 h-8 text-slate-400" />
@@ -134,7 +139,7 @@ export function RecentActivity({ user }: RecentActivityProps) {
         ) : (
           <>
             <div className="space-y-3">
-              {activities.map((activity, index) => {
+              {activities?.map((activity, index) => {
                 const Icon = getActivityIcon(activity.type);
                 const colorClass = getActivityColor(activity.type);
                 const bgColorClass = getActivityBgColor(activity.type);
