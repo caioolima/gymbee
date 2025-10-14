@@ -1,7 +1,7 @@
 import { RegisterUserRequest, RegisterTrainerRequest, AuthResponse, ApiError } from '@/types/auth';
 import { authInterceptor } from './authInterceptor';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://gymbee-backend-v2.onrender.com/api';
 
 class ApiService {
   private baseURL: string;
