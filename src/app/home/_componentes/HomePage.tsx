@@ -16,11 +16,21 @@ export function HomePage() {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
-      <SolutionsSection />
-      <WhyGymBeeSection />
-      <HowItWorksSection />
-      <CTASection />
-      <Footer />
+      <Suspense fallback={<div className="h-96 bg-background" />}>
+        <SolutionsSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 bg-background" />}>
+        <WhyGymBeeSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 bg-background" />}>
+        <HowItWorksSection />
+      </Suspense>
+      <Suspense fallback={<div className="h-96 bg-background" />}>
+        <CTASection />
+      </Suspense>
+      <Suspense fallback={<div className="h-32 bg-background" />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
