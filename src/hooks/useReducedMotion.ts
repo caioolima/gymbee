@@ -3,16 +3,14 @@
 import { useState, useEffect } from 'react';
 
 export function useReducedMotion() {
-  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(true); // Sempre true por enquanto
 
   useEffect(() => {
-    // Detectar se é mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-    
     // Detectar preferência do usuário por movimento reduzido
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    setShouldReduceMotion(isMobile || prefersReducedMotion);
+    // Por enquanto, sempre reduzir animações para melhor performance
+    setShouldReduceMotion(true);
   }, []);
 
   return shouldReduceMotion;

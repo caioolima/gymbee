@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Target, Users, MapPin, Calendar, Shield, Star, CheckCircle, ArrowRight } from 'lucide-react';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 export function WhyGymBeeSection() {
+  const shouldReduceMotion = useReducedMotion();
+  
   const differentiators = [
     {
       icon: Target,
@@ -51,15 +54,15 @@ export function WhyGymBeeSection() {
         {/* Header */}
         <motion.div 
           className="text-center mb-16 sm:mb-20 lg:mb-24"
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.div 
             className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-yellow-300/10 border border-accent/20 rounded-full px-6 py-3 text-accent text-sm font-medium mb-8 shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
+            whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            transition={shouldReduceMotion ? {} : { duration: 0.3 }}
           >
             <Star className="w-4 h-4" />
             Por que escolher a GymBee?
@@ -92,9 +95,9 @@ export function WhyGymBeeSection() {
               <motion.div
                 key={item.title}
                 className={`group relative ${index >= 2 ? 'hidden sm:block' : ''}`}
-                initial={{ opacity: 0, y: 50 }}
+                initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
                 <div className="relative bg-gradient-to-br from-card-bg/80 to-card-bg/40 backdrop-blur-sm border border-border/50 rounded-3xl p-8 hover:border-accent/50 transition-all duration-500 hover:shadow-2xl hover:shadow-accent/20 hover:-translate-y-3 group h-full">
@@ -104,8 +107,8 @@ export function WhyGymBeeSection() {
                   {/* Icon */}
                   <motion.div 
                     className={`relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${item.color} rounded-3xl mb-6 shadow-2xl shadow-accent/20`}
-                    whileHover={{ rotate: 10, scale: 1.15 }}
-                    transition={{ duration: 0.4 }}
+                    whileHover={shouldReduceMotion ? {} : { rotate: 5, scale: 1.05 }}
+                    transition={shouldReduceMotion ? {} : { duration: 0.3 }}
                   >
                     <item.icon className="w-10 h-10 text-white" />
                     {/* Glow effect */}
@@ -125,9 +128,9 @@ export function WhyGymBeeSection() {
                       <motion.div 
                         key={benefitIndex}
                         className="flex items-center gap-2 text-sm text-text-muted"
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -5 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: (index * 0.1) + (benefitIndex * 0.1) }}
+                        transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.2, delay: (index * 0.05) + (benefitIndex * 0.05) }}
                         viewport={{ once: true }}
                       >
                         <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
@@ -147,9 +150,9 @@ export function WhyGymBeeSection() {
         {/* Call to action modernizado */}
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="relative max-w-5xl mx-auto p-8 sm:p-12 bg-gradient-to-br from-card-bg/60 to-card-bg/30 backdrop-blur-sm border border-border/50 rounded-3xl shadow-2xl shadow-accent/10">
@@ -179,8 +182,8 @@ export function WhyGymBeeSection() {
                 <motion.a 
                   href="/register"
                   className="inline-flex items-center gap-3 bg-gradient-to-r from-accent to-yellow-300 text-black font-bold py-4 px-8 rounded-2xl shadow-2xl shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 hover:scale-105"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 >
                   <Shield className="w-5 h-5" />
                   <span>Começar Grátis Agora</span>
