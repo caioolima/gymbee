@@ -107,7 +107,7 @@ export function HeroSection() {
             </motion.div>
 
           </motion.div>
-                   
+
           {/* Visual Principal - Imagem Real de Pessoas Treinando */}
           <motion.div 
             className="relative"
