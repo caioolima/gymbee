@@ -102,7 +102,7 @@ export function InstagramSidebar({ sidebarOpen, setSidebarOpen, isCollapsed, set
       {/* Sidebar */}
       <div className={`${isCollapsed ? 'w-16' : 'w-64'} bg-gradient-to-b from-background via-background to-background/95 backdrop-blur-xl border-r border-border/50 h-full flex-shrink-0 transition-all duration-300 shadow-2xl ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-      } fixed lg:relative z-50 lg:z-auto`}>
+      } fixed lg:relative z-50 lg:z-auto top-0 left-0`}>
         <div className={`${isCollapsed ? 'p-2' : 'p-6'} h-full flex flex-col relative`}>
           {/* Toggle Button */}
           <motion.button

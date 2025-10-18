@@ -157,17 +157,6 @@ export function UserRanking({ user }: UserRankingProps) {
           })}
         </div>
 
-        {/* View All Button */}
-        <div className="mt-6 pt-4 border-t border-border/30">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-card-bg/50 hover:bg-card-bg/80 border border-border/30 hover:border-accent/30 text-foreground font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            <Trophy className="w-4 h-4" />
-            <span className="text-sm">Ver Ranking Completo</span>
-          </motion.button>
-        </div>
       </div>
     </div>
   );

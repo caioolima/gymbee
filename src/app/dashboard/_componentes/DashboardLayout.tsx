@@ -39,20 +39,20 @@ export function DashboardLayout({ user }: DashboardLayoutProps) {
         />
 
         {/* Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <DashboardStats user={user} />
-              <div className="grid lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <ActiveGoalCard user={user} />
                 <LastWorkoutCardWithModals user={user} />
                 <RecentActivity user={user} />
               </div>
-              <div className="grid lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 <ArticlesCarousel user={user} />
                 <UserRanking user={user} />
               </div>
