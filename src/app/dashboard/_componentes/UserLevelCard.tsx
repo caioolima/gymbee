@@ -72,7 +72,7 @@ export function UserLevelCard() {
           </div>
           
           <div className="text-sm text-text-muted mb-3">
-            {levelInfo.nextLevelXp && levelInfo.currentLevelXp ? `${levelInfo.nextLevelXp - levelInfo.currentLevelXp} XP para o próximo nível` : 'Calculando...'}
+            {levelInfo.xpToNextLevel || 0} XP para o próximo nível
           </div>
 
           {/* Progress Bar */}
