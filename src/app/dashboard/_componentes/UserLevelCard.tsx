@@ -7,6 +7,16 @@ import { useUserLevel } from '@/hooks/useUserLevelQuery';
 export function UserLevelCard() {
   const { levelInfo, isLoading, error } = useUserLevel();
 
+  // Debug: log levelInfo para verificar os dados
+  console.log('UserLevelCard - levelInfo:', levelInfo);
+
+  // Calcular xpToNextLevel se não estiver definido ou for NaN
+  const xpToNextLevel = levelInfo?.xpToNextLevel && !isNaN(levelInfo.xpToNextLevel) 
+    ? levelInfo.xpToNextLevel 
+    : levelInfo?.nextLevelXp && levelInfo?.currentLevelXp 
+      ? levelInfo.nextLevelXp - levelInfo.currentLevelXp 
+      : 0;
+
   if (isLoading) {
     return (
       <motion.div
@@ -72,7 +82,7 @@ export function UserLevelCard() {
           </div>
           
           <div className="text-sm text-text-muted mb-3">
-            {levelInfo.xpToNextLevel} XP para o próximo nível
+            {xpToNextLevel} XP para o próximo nível
           </div>
 
           {/* Progress Bar */}

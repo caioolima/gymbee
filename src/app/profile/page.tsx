@@ -831,7 +831,13 @@ export default function ProfilePage() {
                             </div>
                             <div className="bg-card-bg/30 p-4 rounded-lg">
                               <div className="text-text-muted mb-2">XP para Próximo</div>
-                              <div className="font-semibold text-accent text-lg">{levelInfo.xpToNextLevel} XP</div>
+                              <div className="font-semibold text-accent text-lg">
+                                {levelInfo.xpToNextLevel && !isNaN(levelInfo.xpToNextLevel) 
+                                  ? levelInfo.xpToNextLevel 
+                                  : levelInfo.nextLevelXp && levelInfo.currentLevelXp 
+                                    ? levelInfo.nextLevelXp - levelInfo.currentLevelXp 
+                                    : 0} XP
+                              </div>
                             </div>
                           </div>
                         </div>
