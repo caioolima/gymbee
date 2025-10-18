@@ -442,28 +442,20 @@ export default function ProfilePage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-accent to-yellow-300 rounded-2xl animate-pulse opacity-20"></div>
                   <Star className="w-8 h-8 text-black group-hover:rotate-12 transition-transform duration-300 relative z-10" />
                 </div>
-                <h4 className="font-bold text-foreground text-lg">Nível {levelInfo.level}</h4>
-                <p className="text-sm text-text-muted">{levelInfo.totalXp} XP</p>
-                <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-gradient-to-r from-accent to-yellow-400 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${(levelInfo.currentLevelXp / levelInfo.nextLevelXp) * 100}%` }}
-                  ></div>
-                </div>
-                <p className="text-xs text-text-muted mt-1">
-                  {isNaN(levelInfo.nextLevelXp - levelInfo.currentLevelXp) ? 'Calculando...' : `${levelInfo.nextLevelXp - levelInfo.currentLevelXp} XP para o próximo nível`}
-                </p>
+                <h4 className="font-bold text-foreground text-xl">Nível {levelInfo.level}</h4>
+                <p className="text-base text-text-muted mb-2">{levelInfo.totalXp} XP</p>
+                <p className="text-xs text-accent font-medium">Continue evoluindo!</p>
               </div>
             )}
             
             {/* Badge de Treinos */}
-            <div className="text-center p-6 bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-2xl border border-green-500/20 hover:border-green-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+            <div className="text-center p-8 bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-2xl border border-green-500/20 hover:border-green-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
               <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
                 <Trophy className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-300" />
               </div>
-              <h4 className="font-bold text-foreground text-lg">{stats.data?.totalWorkouts || 0}</h4>
-              <p className="text-sm text-text-muted">Treinos Completos</p>
-              <div className="mt-2 text-xs text-green-400 font-medium">
+              <h4 className="font-bold text-foreground text-xl">{stats.data?.totalWorkouts || 0}</h4>
+              <p className="text-sm text-text-muted mb-2">Treinos Completos</p>
+              <div className="text-sm text-green-400 font-medium">
                 {stats.data?.totalWorkouts >= 10 ? 'Expert' : 
                  stats.data?.totalWorkouts >= 5 ? 'Intermediário' : 
                  stats.data?.totalWorkouts >= 1 ? 'Iniciante' : 'Começando'}
@@ -471,13 +463,13 @@ export default function ProfilePage() {
             </div>
             
             {/* Badge de Sequência */}
-            <div className="text-center p-6 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+            <div className="text-center p-8 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
                 <Activity className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <h4 className="font-bold text-foreground text-lg">{stats.data?.currentStreak || 0}</h4>
-              <p className="text-sm text-text-muted">Dias de Sequência</p>
-              <div className="mt-2 text-xs text-blue-400 font-medium">
+              <h4 className="font-bold text-foreground text-xl">{stats.data?.currentStreak || 0}</h4>
+              <p className="text-sm text-text-muted mb-2">Dias de Sequência</p>
+              <div className="text-sm text-blue-400 font-medium">
                 {stats.data?.currentStreak >= 30 ? 'Incrível' : 
                  stats.data?.currentStreak >= 7 ? 'Bom' : 
                  stats.data?.currentStreak >= 1 ? 'Começando' : 'Vamos começar'}
@@ -485,13 +477,13 @@ export default function ProfilePage() {
             </div>
             
             {/* Badge de Objetivos */}
-            <div className="text-center p-6 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
+            <div className="text-center p-8 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer group">
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
                 <Target className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-300" />
               </div>
-              <h4 className="font-bold text-foreground text-lg">{stats.data?.goalsAchieved || 0}</h4>
-              <p className="text-sm text-text-muted">Metas Alcançadas</p>
-              <div className="mt-2 text-xs text-purple-400 font-medium">
+              <h4 className="font-bold text-foreground text-xl">{stats.data?.goalsAchieved || 0}</h4>
+              <p className="text-sm text-text-muted mb-2">Metas Alcançadas</p>
+              <div className="text-sm text-purple-400 font-medium">
                 {stats.data?.goalsAchieved >= 5 ? 'Focado' : 
                  stats.data?.goalsAchieved >= 2 ? 'Determinado' : 
                  stats.data?.goalsAchieved >= 1 ? 'Iniciante' : 'Vamos definir metas'}
