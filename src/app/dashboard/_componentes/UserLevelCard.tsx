@@ -72,7 +72,7 @@ export function UserLevelCard() {
           </div>
           
           <div className="text-sm text-text-muted mb-3">
-            {isNaN(levelInfo.xpToNextLevel) ? 'Calculando...' : `${levelInfo.xpToNextLevel} XP para o próximo nível`}
+            {levelInfo.nextLevelXp && levelInfo.currentLevelXp ? `${levelInfo.nextLevelXp - levelInfo.currentLevelXp} XP para o próximo nível` : 'Calculando...'}
           </div>
 
           {/* Progress Bar */}
