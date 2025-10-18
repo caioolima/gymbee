@@ -12,9 +12,8 @@ export function Header() {
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
-    { href: '#home', label: 'Treine Melhor' },
+    { href: '#home', label: 'Início' },
     { href: '#features', label: 'Soluções' },
-    { href: '#why-gymbee', label: 'Por que GymBee' },
     { href: '#how-it-works', label: 'Como Funciona' },
     { href: '#cta', label: 'Começar' },
   ];
@@ -24,7 +23,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 20);
       
       // Scroll spy
-      const sections = ['home', 'features', 'why-gymbee', 'how-it-works', 'cta'];
+      const sections = ['home', 'features', 'how-it-works', 'cta'];
       let current = 'home';
       
       for (let i = sections.length - 1; i >= 0; i--) {

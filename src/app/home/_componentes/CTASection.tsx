@@ -6,10 +6,10 @@ import { ArrowRight, CheckCircle, Zap, Shield, Clock, Star, Target, Zap as Light
 
 export function CTASection() {
   const benefits = [
-    { icon: CheckCircle, text: "Totalmente gratuito", color: "text-green-500" },
-    { icon: Shield, text: "Sem compromisso", color: "text-blue-500" },
-    { icon: Clock, text: "Acesso imediato", color: "text-purple-500" },
-    { icon: Zap, text: "Funcionalidades pagas", color: "text-yellow-500" }
+    { icon: CheckCircle, text: "100% gratuito", color: "text-green-500" },
+    { icon: Shield, text: "Dados seguros", color: "text-blue-500" },
+    { icon: Clock, text: "Acesso instantâneo", color: "text-purple-500" },
+    { icon: Zap, text: "Algoritmo proprietário", color: "text-yellow-500" }
   ];
 
 
@@ -112,17 +112,27 @@ export function CTASection() {
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-sm text-text-muted text-center mb-4 flex items-center justify-center gap-2">
-              <Lightning className="w-4 h-4 text-accent" />
-              Últimas 24h: 47 novas duplas formadas
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 mb-6">
+              <div className="flex items-center gap-2 text-text-muted">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium">10.000+ usuários ativos</span>
+              </div>
+              <div className="flex items-center gap-2 text-text-muted">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium">500+ duplas formadas</span>
+              </div>
+              <div className="flex items-center gap-2 text-text-muted">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium">50+ academias parceiras</span>
+              </div>
+            </div>
             <div className="flex justify-center items-center gap-2 text-accent">
               <Star className="w-4 h-4 fill-current" />
               <Star className="w-4 h-4 fill-current" />
               <Star className="w-4 h-4 fill-current" />
               <Star className="w-4 h-4 fill-current" />
               <Star className="w-4 h-4 fill-current" />
-              <span className="ml-2 text-sm font-medium">4.9/5 (2.847 avaliações)</span>
+              <span className="ml-2 text-sm font-medium">4.8/5 (1.247 avaliações)</span>
             </div>
           </motion.div>
         </div>

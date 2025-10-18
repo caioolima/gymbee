@@ -3,9 +3,12 @@
 import Link from 'next/link';
 import { ArrowRight, Users, Calendar, Download, Zap, Star, Target, Activity } from 'lucide-react';
 import { usePWAInstall } from '@/hooks/usePWAInstall';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { motion } from 'framer-motion';
 
 export function HeroSection() {
   const { isInstallable, isInstalled, installPWA, isIOS } = usePWAInstall();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="home" className="relative min-h-screen bg-gradient-to-br from-background via-card-bg/20 to-background overflow-hidden">
@@ -18,14 +21,29 @@ export function HeroSection() {
       <div className="relative max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Conteúdo Principal */}
-          <div className="space-y-8 sm:space-y-10 lg:space-y-12">
+          <motion.div 
+            className="space-y-8 sm:space-y-10 lg:space-y-12"
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.8, ease: "easeOut" }}
+          >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-yellow-300/10 border border-accent/20 rounded-full px-6 py-3 text-accent text-sm font-medium shadow-lg">
+            <motion.div 
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/10 to-yellow-300/10 border border-accent/20 rounded-full px-6 py-3 text-accent text-sm font-medium shadow-lg"
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.6, delay: 0.2 }}
+            >
               <Zap className="w-4 h-4" />
               Primeira solução brasileira
-            </div>
+            </motion.div>
 
-            <div className="space-y-8">
+            <motion.div 
+              className="space-y-8"
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.7, delay: 0.3 }}
+            >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
                 <span>Treine melhor.</span>
                 <br></br>
@@ -36,10 +54,15 @@ export function HeroSection() {
               <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl font-medium">
                 A primeira solução brasileira que conecta pessoas da mesma academia para treinar juntas. Pare de treinar sozinho e acelere seus resultados.
               </p>
-            </div>
+            </motion.div>
 
             {/* Botões de Ação */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6"
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.6, delay: 0.5 }}
+            >
               <div>
                 <Link
                   href="/register"
@@ -60,10 +83,15 @@ export function HeroSection() {
                 <Download className="w-5 h-5 sm:w-6 sm:h-6" />
                 {isInstalled ? 'App Instalado' : isIOS ? 'Instalar App' : isInstallable ? 'Baixar App' : 'Baixar App'}
               </button>
-            </div>
+            </motion.div>
 
             {/* Stats rápidas */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-4">
+            <motion.div 
+              className="grid grid-cols-3 gap-4 sm:gap-6 pt-4"
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.6, delay: 0.7 }}
+            >
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-accent">10K+</div>
                 <div className="text-sm text-text-muted">Usuários ativos</div>
@@ -75,13 +103,18 @@ export function HeroSection() {
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-accent">95%</div>
                 <div className="text-sm text-text-muted">Satisfação</div>
-                     </div>
-                   </div>
+              </div>
+            </motion.div>
 
-                   </div>
+          </motion.div>
                    
           {/* Visual Principal - Imagem Real de Pessoas Treinando */}
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={shouldReduceMotion ? { duration: 0.1 } : { duration: 0.8, delay: 0.4 }}
+          >
             {/* Imagem de Pessoas Treinando */}
             <div className="flex justify-center items-center">
               <div className="relative">
@@ -103,7 +136,7 @@ export function HeroSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

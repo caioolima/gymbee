@@ -6,7 +6,6 @@ import { HeroSection } from './HeroSection';
 
 // Lazy load sections para melhor performance
 const SolutionsSection = lazy(() => import('./SolutionsSection').then(m => ({ default: m.SolutionsSection })));
-const WhyGymBeeSection = lazy(() => import('./WhyGymBeeSection').then(m => ({ default: m.WhyGymBeeSection })));
 const HowItWorksSection = lazy(() => import('./HowItWorksSection').then(m => ({ default: m.HowItWorksSection })));
 const CTASection = lazy(() => import('./CTASection').then(m => ({ default: m.CTASection })));
 const Footer = lazy(() => import('./Footer').then(m => ({ default: m.Footer })));
@@ -18,9 +17,6 @@ export function HomePage() {
       <HeroSection />
       <Suspense fallback={<div className="h-96 bg-background" />}>
         <SolutionsSection />
-      </Suspense>
-      <Suspense fallback={<div className="h-96 bg-background" />}>
-        <WhyGymBeeSection />
       </Suspense>
       <Suspense fallback={<div className="h-96 bg-background" />}>
         <HowItWorksSection />

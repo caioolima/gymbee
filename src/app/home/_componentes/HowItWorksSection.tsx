@@ -9,8 +9,8 @@ export function HowItWorksSection() {
     {
       number: "01",
       icon: UserPlus,
-      title: "Cadastro Rápido",
-      description: "Preencha seu perfil em menos de 2 minutos",
+      title: "Crie seu Perfil",
+      description: "Cadastre-se em segundos e defina seus objetivos de treino",
       color: "from-blue-500 to-cyan-500",
       gradient: "from-blue-400/20 to-cyan-400/20"
     },
@@ -18,7 +18,7 @@ export function HowItWorksSection() {
       number: "02", 
       icon: Calendar,
       title: "Configure Preferências",
-      description: "Defina horários, localização e tipo de treino",
+      description: "Defina horários, localização e tipo de treino preferido",
       color: "from-purple-500 to-pink-500",
       gradient: "from-purple-400/20 to-pink-400/20"
     },
@@ -26,15 +26,15 @@ export function HowItWorksSection() {
       number: "03",
       icon: Users,
       title: "Receba Matches",
-      description: "Nosso algoritmo encontra pessoas compatíveis",
+      description: "Nosso algoritmo inteligente encontra pessoas compatíveis",
       color: "from-green-500 to-emerald-500",
       gradient: "from-green-400/20 to-emerald-400/20"
     },
     {
       number: "04",
       icon: MapPin,
-      title: "Confirme Encontro",
-      description: "Aceite ou recuse sugestões em tempo real",
+      title: "Conecte-se",
+      description: "Aceite matches e comece a treinar com sua dupla ideal",
       color: "from-orange-500 to-red-500",
       gradient: "from-orange-400/20 to-red-400/20"
     }
