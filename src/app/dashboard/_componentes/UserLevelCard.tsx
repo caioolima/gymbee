@@ -71,7 +71,7 @@ export function UserLevelCard() {
             </div>
           </div>
           
-          <div className="text-sm text-text-muted mb-3">
+          <div className="text-base font-medium text-accent mb-3">
             Continue treinando para evoluir!
           </div>
 

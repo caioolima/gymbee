@@ -68,25 +68,9 @@ export function InstagramSidebar({ sidebarOpen, setSidebarOpen, isCollapsed, set
     }
   };
 
-  // Evitar hidratação mismatch
+  // Evitar hidratação mismatch - renderizar sempre o mesmo conteúdo
   if (!mounted) {
-    return (
-      <div className="w-64 bg-gradient-to-b from-background via-background to-background/95 backdrop-blur-xl border-r border-border/50 h-full flex-shrink-0 shadow-2xl">
-        <div className="p-6 h-full flex flex-col relative">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 bg-gradient-to-r from-accent to-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-black font-bold text-lg">G</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
-                GymBee
-              </h1>
-              <p className="text-xs text-text-muted">Fitness Network</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

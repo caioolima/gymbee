@@ -226,8 +226,8 @@ export default function ProfilePage() {
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-8 h-8 animate-spin text-accent mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-foreground">Carregando perfil...</h2>
-            <p className="text-text-muted">Buscando seus dados</p>
+            <h2 className="text-2xl font-bold text-foreground">Carregando perfil...</h2>
+            <p className="text-lg text-text-muted">Buscando seus dados</p>
           </div>
         </div>
       </StandardLayout>
